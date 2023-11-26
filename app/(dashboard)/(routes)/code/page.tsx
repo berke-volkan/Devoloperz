@@ -15,6 +15,7 @@ const firebaseConfig = {
   appId: "1:851290003802:web:4761f04f7a1b4b63273b63"
 };
 // Initialize Firebase
+// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);  // Get the database reference
 
@@ -24,14 +25,14 @@ const App = () => {
   const { user } = useUser();
 
   const handleSendMessage = () => {
-    if (newMessage.trim() === '') {
+    if (newMessage.trim() === '' || !user) {
       return;
     }
 
     const message = {
       text: newMessage,
       timestamp: new Date().toISOString(),
-      username: user.firstName.substring(0, 5),
+      username: user.firstName?.substring(0, 5), // Add a nullish coalescing operator
     };
 
     const messagesRef = ref(database, 'messages');
