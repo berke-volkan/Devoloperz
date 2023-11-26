@@ -33,27 +33,19 @@ const App = () => {
   const [newMessage, setNewMessage] = useState<string>('');
   const { user } = useUser();
   useEffect(() => {
-  // Realtime database dinleme
   const msgRef = ref(database, 'messages');
-  onValue(msgRef, (snapshot) => {
-    const data = snapshot.val();
-const formattedData: Message[] =
-  data
-    ? Object.keys(data).map((id) => ({ ...data[id], id } as Message))
-    : [];
+  const unsubscribe = onValue(msgRef, (snapshot) => {
+    const data: Message[] = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() as Message }));
 
+    const formattedData = data
+      ? Object.keys(data).map((id) => ({ id, ...data[id] }))
+      : [];
     setMessages(formattedData);
   });
 
-  // Firestore dinleme
-  const firestoreMsgRef = collection(firestore, 'messages');
-  const unsubscribe = onSnapshot(firestoreMsgRef, (snapshot) => {
-    const data: Message[] = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() as Message }));
-    setMessages((prevMessages) => [...prevMessages, ...data]);
-  });
-
   return () => unsubscribe();
-}, [database, firestore]);
+}, []); // Empty dependency array
+
 
   return (
     <div className="container mx-auto p-4">
