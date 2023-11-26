@@ -7,6 +7,13 @@ import { getDatabase, ref, onValue, push } from 'firebase/database';
 import { initializeApp } from 'firebase/app';
 import { getFirestore, collection, addDoc, onSnapshot } from 'firebase/firestore';
 
+interface Message {
+  id: string;
+  text: string;
+  timestamp: string;
+  username: string;
+}
+
 const firebaseConfig = {
   apiKey: "AIzaSyBq0UtNaMQ9W2yrOakjutO47WZjJgH4bUw",
   authDomain: "devoloperz.firebaseapp.com",
@@ -22,8 +29,8 @@ const database = getDatabase(app);
 const firestore = getFirestore(app);
 
 const App = () => {
-  const [messages, setMessages] = useState([]);
-  const [newMessage, setNewMessage] = useState('');
+  const [messages, setMessages] = useState<Message[]>([]);
+  const [newMessage, setNewMessage] = useState<string>('');
   const { user } = useUser();
 
   useEffect(() => {
@@ -31,16 +38,17 @@ const App = () => {
     const msgRef = ref(database, 'messages');
     onValue(msgRef, (snapshot) => {
       const data = snapshot.val();
-      const formattedData = data
-        ? Object.keys(data).map((id) => ({ id, ...data[id] }))
-        : [];
+      const formattedData: Message[] =
+        data
+          ? Object.keys(data).map((id) => ({ id, ...data[id] }))
+          : [];
       setMessages(formattedData);
     });
 
     // Firestore dinleme
     const firestoreMsgRef = collection(firestore, 'messages');
     const unsubscribe = onSnapshot(firestoreMsgRef, (snapshot) => {
-      const data = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+      const data: Message[] = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
       setMessages((prevMessages) => [...prevMessages, ...data]);
     });
 
@@ -52,7 +60,7 @@ const App = () => {
       return;
     }
 
-    const message = {
+    const message: Message = {
       text: newMessage,
       timestamp: new Date().toISOString(),
       username: user.firstName.substring(0, 5),
@@ -105,4 +113,3 @@ const AuthenticatedApp = () => (
 );
 
 export default AuthenticatedApp;
-
