@@ -18,6 +18,13 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);  // Get the database reference
+interface Message {
+  id: string;
+  text: string;
+  timestamp: string;
+  username: string;
+  // Add any other properties you might have
+}
 
 const App = () => {
   const [messages, setMessages] = useState<Message[]>([]);
