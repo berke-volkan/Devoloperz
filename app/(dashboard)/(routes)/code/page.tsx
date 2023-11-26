@@ -32,11 +32,10 @@ const App = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [newMessage, setNewMessage] = useState<string>('');
   const { user } = useUser();
-  useEffect(() => {
+useEffect(() => {
   const msgRef = ref(database, 'messages');
   const unsubscribe = onValue(msgRef, (snapshot) => {
-    const data: Message[] = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() as Message }));
-
+    const data = snapshot.val();
     const formattedData = data
       ? Object.keys(data).map((id) => ({ id, ...data[id] }))
       : [];
@@ -44,7 +43,8 @@ const App = () => {
   });
 
   return () => unsubscribe();
-}, []); // Empty dependency array
+}, []);
+
 
 
   return (
