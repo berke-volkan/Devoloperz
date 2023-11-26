@@ -20,7 +20,8 @@ const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);  // Get the database reference
 
 const App = () => {
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState<Message[]>([]);
+
   const [newMessage, setNewMessage] = useState('');
   const { user } = useUser();
 
