@@ -1,23 +1,24 @@
 "use client"
-
 import React, { useState, useEffect } from 'react';
 import { useUser } from '@clerk/clerk-react';
 import { Heading } from '@/components/heading';
 import { CodeIcon } from 'lucide-react';
-import { collection, addDoc, onSnapshot } from 'firebase/firestore';
+import { getDatabase, ref, onValue, push } from 'firebase/database';
 import { initializeApp } from 'firebase/app';
-import { getFirestore } from 'firebase/firestore';
+import { getFirestore, collection, addDoc, onSnapshot } from 'firebase/firestore';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBq0UtNaMQ9W2yrOakjutO47WZjJgH4bUw",
-  authDomain: "devoloperz.firebaseapp.com",
-  projectId: "devoloperz",
-  storageBucket: "devoloperz.appspot.com",
-  messagingSenderId: "851290003802",
-  appId: "1:851290003802:web:4761f04f7a1b4b63273b63"
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_AUTH_DOMAIN",
+  projectId: "YOUR_PROJECT_ID",
+  storageBucket: "YOUR_STORAGE_BUCKET",
+  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+  appId: "YOUR_APP_ID"
 };
+
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+const database = getDatabase(app);
 const firestore = getFirestore(app);
 
 const App = () => {
@@ -26,15 +27,25 @@ const App = () => {
   const { user } = useUser();
 
   useEffect(() => {
-    const messagesRef = collection(firestore, 'messages');
+    // Realtime database dinleme
+    const msgRef = ref(database, 'messages');
+    onValue(msgRef, (snapshot) => {
+      const data = snapshot.val();
+      const formattedData = data
+        ? Object.keys(data).map((id) => ({ id, ...data[id] }))
+        : [];
+      setMessages(formattedData);
+    });
 
-    const unsubscribe = onSnapshot(messagesRef, (snapshot) => {
-      const data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-      setMessages(data);
+    // Firestore dinleme
+    const firestoreMsgRef = collection(firestore, 'messages');
+    const unsubscribe = onSnapshot(firestoreMsgRef, (snapshot) => {
+      const data = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+      setMessages((prevMessages) => [...prevMessages, ...data]);
     });
 
     return () => unsubscribe();
-  }, [firestore]);
+  }, [database, firestore]);
 
   const handleSendMessage = async () => {
     if (newMessage.trim() === '') {
@@ -47,8 +58,12 @@ const App = () => {
       username: user.firstName.substring(0, 5),
     };
 
-    const messagesRef = collection(firestore, 'messages');
-    await addDoc(messagesRef, message);
+    // Realtime database'ye ekleme
+    const messagesRef = ref(database, 'messages');
+    push(messagesRef, message);
+
+    // Firestore'a ekleme
+    await addDoc(collection(firestore, 'messages'), message);
 
     setNewMessage('');
   };
