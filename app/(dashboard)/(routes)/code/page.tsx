@@ -4,15 +4,7 @@ import { useUser } from '@clerk/clerk-react';
 import { Heading } from '@/components/heading';
 import { CodeIcon } from 'lucide-react';
 import { getDatabase, ref, onValue, push } from 'firebase/database';
-import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, addDoc, onSnapshot } from 'firebase/firestore';
-
-interface Message {
-  id: string;
-  text: string;
-  timestamp: string;
-  username: string;
-}
+import { initializeApp } from "firebase/app";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBq0UtNaMQ9W2yrOakjutO47WZjJgH4bUw",
@@ -22,30 +14,44 @@ const firebaseConfig = {
   messagingSenderId: "851290003802",
   appId: "1:851290003802:web:4761f04f7a1b4b63273b63"
 };
-
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const database = getDatabase(app);
-const firestore = getFirestore(app);
+const database = getDatabase(app);  // Get the database reference
 
 const App = () => {
-  const [messages, setMessages] = useState<Message[]>([]);
-  const [newMessage, setNewMessage] = useState<string>('');
+  const [messages, setMessages] = useState([]);
+  const [newMessage, setNewMessage] = useState('');
   const { user } = useUser();
-useEffect(() => {
-  const msgRef = ref(database, 'messages');
-  const unsubscribe = onValue(msgRef, (snapshot) => {
-    const data = snapshot.val();
-    const formattedData = data
-      ? Object.keys(data).map((id) => ({ id, ...data[id] }))
-      : [];
-    setMessages(formattedData);
-  });
 
-  return () => unsubscribe();
-}, []);
+  const handleSendMessage = () => {
+    if (newMessage.trim() === '') {
+      return;
+    }
 
+    const message = {
+      text: newMessage,
+      timestamp: new Date().toISOString(),
+      username: user.firstName.substring(0, 5),
+    };
 
+    const messagesRef = ref(database, 'messages');
+    push(messagesRef, message);
+
+    setNewMessage('');
+  };
+
+  useEffect(() => {
+    const msgRef = ref(database, 'messages');
+    const unsubscribe = onValue(msgRef, (snapshot) => {
+      const data = snapshot.val();
+      const formattedData = data
+        ? Object.keys(data).map((id) => ({ id, ...data[id] }))
+        : [];
+      setMessages(formattedData);
+    });
+
+    return () => unsubscribe();
+  }, [database]);
 
   return (
     <div className="container mx-auto p-4">
