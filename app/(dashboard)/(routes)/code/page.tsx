@@ -8,12 +8,12 @@ import { initializeApp } from 'firebase/app';
 import { getFirestore, collection, addDoc, onSnapshot } from 'firebase/firestore';
 
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_AUTH_DOMAIN",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_STORAGE_BUCKET",
-  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-  appId: "YOUR_APP_ID"
+  apiKey: "AIzaSyBq0UtNaMQ9W2yrOakjutO47WZjJgH4bUw",
+  authDomain: "devoloperz.firebaseapp.com",
+  projectId: "devoloperz",
+  storageBucket: "devoloperz.appspot.com",
+  messagingSenderId: "851290003802",
+  appId: "1:851290003802:web:4761f04f7a1b4b63273b63"
 };
 
 // Initialize Firebase
