@@ -37,10 +37,11 @@ const App = () => {
   const msgRef = ref(database, 'messages');
   onValue(msgRef, (snapshot) => {
     const data = snapshot.val();
-    const formattedData: Message[] =
-      data
-        ? Object.keys(data).map((id) => ({ id, ...data[id] as Message }))
-        : [];
+const formattedData: Message[] =
+  data
+    ? Object.keys(data).map((id) => ({ ...data[id], id } as Message))
+    : [];
+
     setMessages(formattedData);
   });
 
