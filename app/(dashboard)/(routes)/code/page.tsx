@@ -32,49 +32,27 @@ const App = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [newMessage, setNewMessage] = useState<string>('');
   const { user } = useUser();
-
   useEffect(() => {
-    // Realtime database dinleme
-    const msgRef = ref(database, 'messages');
-    onValue(msgRef, (snapshot) => {
-      const data = snapshot.val();
-      const formattedData: Message[] =
-        data
-          ? Object.keys(data).map((id) => ({ id, ...data[id] }))
-          : [];
-      setMessages(formattedData);
-    });
+  // Realtime database dinleme
+  const msgRef = ref(database, 'messages');
+  onValue(msgRef, (snapshot) => {
+    const data = snapshot.val();
+    const formattedData: Message[] =
+      data
+        ? Object.keys(data).map((id) => ({ id, ...data[id] as Message }))
+        : [];
+    setMessages(formattedData);
+  });
 
-    // Firestore dinleme
-    const firestoreMsgRef = collection(firestore, 'messages');
-    const unsubscribe = onSnapshot(firestoreMsgRef, (snapshot) => {
-      const data: Message[] = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-      setMessages((prevMessages) => [...prevMessages, ...data]);
-    });
+  // Firestore dinleme
+  const firestoreMsgRef = collection(firestore, 'messages');
+  const unsubscribe = onSnapshot(firestoreMsgRef, (snapshot) => {
+    const data: Message[] = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() as Message }));
+    setMessages((prevMessages) => [...prevMessages, ...data]);
+  });
 
-    return () => unsubscribe();
-  }, [database, firestore]);
-
-  const handleSendMessage = async () => {
-    if (newMessage.trim() === '') {
-      return;
-    }
-
-    const message: Message = {
-      text: newMessage,
-      timestamp: new Date().toISOString(),
-      username: user.firstName.substring(0, 5),
-    };
-
-    // Realtime database'ye ekleme
-    const messagesRef = ref(database, 'messages');
-    push(messagesRef, message);
-
-    // Firestore'a ekleme
-    await addDoc(collection(firestore, 'messages'), message);
-
-    setNewMessage('');
-  };
+  return () => unsubscribe();
+}, [database, firestore]);
 
   return (
     <div className="container mx-auto p-4">
