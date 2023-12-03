@@ -18,40 +18,24 @@ const routes=[
         color:"text-sky-500"
     },
     {
-        label:"General #Offtopic",
+      label:"Chat Room",
+      icon:Code,
+      href:"/chat",
+      color:"text-green-700"
+  },
+
+  {
+        label:"Link",
         icon:MessageSquare,
-        href:"/general-chat",
+        href:"/l",
         color:"text-violet-700"
-    },
-    {
-        label:"Coding room - Web",
-        icon:ImageIcon,
-        href:"/image",
-        color:"text-pink-500"
-    },
-    {
-        label:"Brainstorm room",
-        icon:VideoIcon,
-        href:"/video",
-        color:"text-orange-700"
-    },
-    {
-        label:"Coding Room - Game",
-        icon:MusicIcon,
-        href:"/music",
-        color:"text-emerald-500"
-    },
-    {
-        label:"Coding Room -Web3",
-        icon:Code,
-        href:"/code",
-        color:"text-green-700"
-    },
-    {
+   },
+
+   {
         label:"Settings",
         icon:Settings,
         href:"/settings"
-    },
+   },
 ];
 const Sidebar= () => {
     const pathname=usePathname();
