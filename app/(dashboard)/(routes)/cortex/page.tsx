@@ -15,8 +15,7 @@ import Empty from "@/components/empty";
 import LoaderNesia from "@/components/loader";
 import { cn } from "@/lib/utils";
 // Other imports...
-import { OpenAIAPI } from 'openai';
-const OpenAI = require("openai");
+import { OpenAI } from 'openai';
 
 const openai = new OpenAI({
 apiKey: "sk-61B0p5iYw4YKZwY20fmOAp4qxQtT4TLb)",
