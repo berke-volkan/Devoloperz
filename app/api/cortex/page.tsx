@@ -33,3 +33,4 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     // Handle the error if needed
     return NextResponse.json({ error: 'Internal Server Error' });
   }
+}
