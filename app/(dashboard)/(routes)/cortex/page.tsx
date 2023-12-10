@@ -16,15 +16,19 @@ import LoaderNesia from "@/components/loader";
 import { cn } from "@/lib/utils";
 // Other imports...
 import { OpenAI } from 'openai';
+import { GetServerSideProps } from 'next';
+
 let token;
-export const getServerSideProps=()=>{
-    token=process.env.open
-    return{
-        props:{
-            env:"hello",
-        }
-    }
-}
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  token = process.env.open;
+  return {
+    props: {
+      env: "hello",
+    },
+  };
+};
+
 const openai = new OpenAI({
 apiKey: token,
 baseURL: 'https://api.h10.pro'
