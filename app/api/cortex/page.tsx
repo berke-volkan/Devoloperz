@@ -1,12 +1,14 @@
 // app/api/cortex/page.tsx
+import { NextApiRequest, NextApiResponse } from 'next';
+
+// Your code here
 
 import axios from 'axios';
-import { NextApiRequest, NextApiResponse } from 'next';
 import { NextResponse } from 'next/server';
 
 const api_key = "sk-61B0p5iYw4YKZwY20fmOAp4qxQtT4TLb";
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const response = await axios({
       method: 'POST',
@@ -31,4 +33,3 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     // Handle the error if needed
     return NextResponse.json({ error: 'Internal Server Error' });
   }
-}
