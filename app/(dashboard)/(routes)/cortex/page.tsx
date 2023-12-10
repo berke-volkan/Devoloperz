@@ -38,17 +38,18 @@ const CınversationPage = () => {
 
     // Use OpenAI for chat completions
     const response = await openai.chat.completions.create({
-      max_tokens: 4096,
-      temperature: 1,
-      top_p: 0,
-      frequency_penalty: 0,
-      presence_penalty: 0,
-      stream: false,
-      messages: [
-        { role: "system", content: "Merhaba! Senin ismin Cortex. Sen dost canlısı bir hikaye yazma Discord botusun." },
-        { role: "user", content: message },
-      ],
-    });
+  model: 'gpt-4-1106-preview', // Add the model property
+  max_tokens: 4096,
+  temperature: 1,
+  top_p: 0,
+  frequency_penalty: 0,
+  presence_penalty: 0,
+  stream: false,
+  messages: [
+    { role: "user", content: message },
+  ],
+});
+
 
     const generatedText = response.choices[0].message.content;
      msg.push(generatedText);
