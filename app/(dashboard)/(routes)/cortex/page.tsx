@@ -20,7 +20,8 @@ let token=process.env.NEXT_PUBLIC_KEY
 
 const openai = new OpenAI({
 apiKey: token,
-baseURL: 'https://api.h10.pro'
+baseURL: 'https://api.h10.pro',
+dangerouslyAllowBrowser: true,
 })
 const msg: string[] = [];
 const CınversationPage = () => {
