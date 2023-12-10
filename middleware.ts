@@ -5,11 +5,7 @@ import { authMiddleware } from "@clerk/nextjs";
 // See https://clerk.com/docs/references/nextjs/auth-middleware for more information about configuring your Middleware
 export default authMiddleware({
       publicRoutes: [
-<<<<<<< HEAD
             "/","/blog","/blog/adm","/api/cortex"
-=======
-            "/","/blog","/blog/adm",/^\/l\//
->>>>>>> a110e6357021ed3e7be487e33eba9e8927171adb
       ]
 });
  

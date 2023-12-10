@@ -13,8 +13,10 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Empty from "@/components/empty";
 import LoaderNesia from "@/components/loader";
-import { cn } from "@/lib/utils";
-const msg: string[] = [];
+import { cn } from "@/lib/utils"; 
+import { BotAvatar } from "@/components/bot-avatar";
+import {UserAvatar} from "@/components/user-avatar";
+let msg: string[] = [];
 const CınversationPage = () => {
     const Router=useRouter();
     const form=useForm<z.infer<typeof FormSchema>>({
@@ -24,35 +26,32 @@ const CınversationPage = () => {
         }
     })
     const isLoading =form.formState.isSubmitting
-    const onSubmit = async (values: z.infer<typeof FormSchema>) => {
-      try {
-        const message = values.prompt;
-        msg.push(message);
-      
-        // Update your client-side code accordingly
-        const response = await axios.post('/api/cortex', {
-          body: message,
-        });
-      
-        // Access the data property directly
-        const responseData = response.data;
-        console.log(responseData);
-      } catch (error) {
-        console.error(error);
-      } finally {
-        Router.refresh();
-      }
-      
+    const onSubmit = async (data: z.infer<typeof FormSchema>) =>{
+        try{
+            let message = data.prompt;
+            const response = await axios.post("/api/ai",{
+                messages:message,
+            })
+            msg.push(message)
+            msg.push(response.data)
+            
+            form.reset();
+        }catch(error:any){
+            console.log(error);
+        }finally{
+            form.reset();
+            Router.refresh();
+        }
+            
     };
-    
     return(
         <div>
             <Heading
-            title="İmagine"
-            description="The only limit is your creativity"
+            title="Devz-Ai"
+            description="Create your apps faster with AI !   Powered by Cortex"
             icon={AtomIcon}
-            iconColor="text-pink-700"
-            bgColor="bg-pink-700/10"
+            iconColor="text-yellow-700"
+            bgColor="bg-yellow-700/10"
             />
             <div className="px-4 lg:px-8">
                 <div>
@@ -68,8 +67,8 @@ const CınversationPage = () => {
                             </FormItem>
                         )}
                         /> 
-                        <Button className="col-span-12 lg:col-span-2 w-full"disabled={isLoading}>
-                            İmagine!
+                        <Button className="col-span-12 lg:col-span-2 w-full"disabled={isLoading} onClick={form.handleSubmit(onSubmit)}>
+                            Ask!
                         </Button>
                      </form>             
                     </Form>
@@ -82,15 +81,19 @@ const CınversationPage = () => {
                     )}
                     {msg.length ===0 && !isLoading && (
                         <Empty 
-                        label="Not imagined yet."/>
+                        label="No messages yet."/>
                     )}
                     <div className="flex flex-col-reverse gap-y-4">
                         {msg.map((message, index) => (
                             <div 
-                            key={message}
-                            className={cn("p-8 w-full flex item-start gap-x-8 rounded-lg")}
-                            >
+                            key={index}
+                            className={cn("p-8 w-full flex item-start gap-x-8 rounded-lg",index % 2 === 0 ? "bg-white border border-black/10" : "bg-muted")}>
+                            
+                            {index % 2 !== 0 ? <BotAvatar/> : <UserAvatar/>}
+                            <p className="text-sm">
                             {message}
+                            </p>
+                            
                             </div>
                         ))}
                     </div>

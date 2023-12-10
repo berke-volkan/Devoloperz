@@ -6,7 +6,7 @@ export const LoaderNesia=()=>{
                 <Image fill src="/logo.png" alt="logo" />
             </div>
             <p className="text-sm text-muted-foreground">
-                Nesia is thinking
+                Devz.Ai is thinking
             </p>
         </div>
     )
