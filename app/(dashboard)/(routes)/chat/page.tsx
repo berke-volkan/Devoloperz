@@ -49,18 +49,19 @@ const App = () => {
     setNewMessage('');
   };
 
-  useEffect(() => {
-    const msgRef = ref(database, 'messages');
-    const unsubscribe = onValue(msgRef, (snapshot) => {
-      const data = snapshot.val();
-      const formattedData = data
-        ? Object.keys(data).map((id) => ({ id, ...data[id] }))
-        : [];
-      setMessages(formattedData);
-    });
+useEffect(() => {
+  const msgRef = ref(database, 'messages');
+  const unsubscribe = onValue(msgRef, (snapshot) => {
+    const data = snapshot.val();
+    const formattedData = data
+      ? Object.keys(data).map((id) => ({ id, ...data[id] }))
+      : [];
+    setMessages(formattedData);
+  });
 
-    return () => unsubscribe();
-  }, [database]);
+  return () => unsubscribe();
+}, []); // Empty dependency array indicates no dependencies
+
 
   return (
     <div className="container mx-auto p-4">
