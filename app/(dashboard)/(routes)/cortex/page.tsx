@@ -33,27 +33,15 @@ const CınversationPage = () => {
         }
     })
     const isLoading =form.formState.isSubmitting
-    const onSubmit = async (values: z.infer<typeof FormSchema>) => {
+   // Your client-side code
+
+const onSubmit = async (values: z.infer<typeof FormSchema>) => {
   try {
     const message = values.prompt;
-    msg.push(message);
 
-    // Use OpenAI for chat completions
-    const response = await openai.chat.completions.create({
-  model: 'gpt-4-1106-preview', // Add the model property
-  max_tokens: 4096,
-  temperature: 1,
-  top_p: 0,
-  frequency_penalty: 0,
-  presence_penalty: 0,
-  stream: false,
-  messages: [
-    { role: "user", content: message },
-  ],
-});
+    const response = await axios.post('/api/openaiRequest', { prompt });
 
-
-    const generatedText = response.choices[0].message.content;
+    const generatedText = response.data.result;
     console.log(generatedText);
   } catch (error) {
     console.error('Error in API request:', error);
@@ -61,6 +49,7 @@ const CınversationPage = () => {
     Router.refresh();
   }
 };
+
 
     
     return(
