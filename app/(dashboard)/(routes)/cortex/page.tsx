@@ -52,7 +52,6 @@ const CınversationPage = () => {
 
 
     const generatedText = response.choices[0].message.content;
-     msg.push(generatedText);
     console.log(generatedText);
   } catch (error) {
     console.error('Error in API request:', error);
