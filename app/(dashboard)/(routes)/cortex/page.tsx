@@ -16,18 +16,7 @@ import LoaderNesia from "@/components/loader";
 import { cn } from "@/lib/utils";
 // Other imports...
 import { OpenAI } from 'openai';
-import { GetServerSideProps } from 'next';
-
-let token;
-
-export const getServerSideProps: GetServerSideProps = async () => {
-  token = process.env.open;
-  return {
-    props: {
-      env: "hello",
-    },
-  };
-};
+let token=process.env.NEXT_PUBLIC_KEY
 
 const openai = new OpenAI({
 apiKey: token,
