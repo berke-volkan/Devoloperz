@@ -23,20 +23,12 @@ const routes=[
       href:"/chat",
       color:"text-green-700"
   },
-<<<<<<< HEAD
-  {
-=======
-      {
->>>>>>> a110e6357021ed3e7be487e33eba9e8927171adb
+ {
     label:"Cortex",
     icon:AtomIcon,
     href:"/cortex",
     color:"text-green-700"
-<<<<<<< HEAD
-  },
-=======
-},
->>>>>>> a110e6357021ed3e7be487e33eba9e8927171adb
+ },
 
   {
         label:"Link",
