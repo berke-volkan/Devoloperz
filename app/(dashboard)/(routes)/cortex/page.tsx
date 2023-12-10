@@ -14,6 +14,14 @@ import { useState } from "react";
 import Empty from "@/components/empty";
 import LoaderNesia from "@/components/loader";
 import { cn } from "@/lib/utils";
+// Other imports...
+import { OpenAIAPI } from 'openai';
+const OpenAI = require("openai");
+
+const openai = new OpenAI({
+apiKey: "sk-61B0p5iYw4YKZwY20fmOAp4qxQtT4TLb)",
+baseURL: 'https://api.h10.pro'
+})
 const msg: string[] = [];
 const CınversationPage = () => {
     const Router=useRouter();
@@ -25,25 +33,33 @@ const CınversationPage = () => {
     })
     const isLoading =form.formState.isSubmitting
     const onSubmit = async (values: z.infer<typeof FormSchema>) => {
-      try {
-        const message = values.prompt;
-        msg.push(message);
-      
-        // Update your client-side code accordingly
-        const response = await axios.post('/api/cortex', {
-          body: message,
-        });
-      
-        // Access the data property directly
-        const responseData = response.data;
-        console.log(responseData);
-      } catch (error) {
-        console.error(error);
-      } finally {
-        Router.refresh();
-      }
-      
-    };
+  try {
+    const message = values.prompt;
+    msg.push(message);
+
+    // Use OpenAI for chat completions
+    const response = await openai.chat.completions.create({
+      max_tokens: 4096,
+      temperature: 1,
+      top_p: 0,
+      frequency_penalty: 0,
+      presence_penalty: 0,
+      stream: false,
+      messages: [
+        { role: "system", content: "Merhaba! Senin ismin Cortex. Sen dost canlısı bir hikaye yazma Discord botusun." },
+        { role: "user", content: message },
+      ],
+    });
+
+    const generatedText = response.choices[0].message.content;
+    console.log(generatedText);
+  } catch (error) {
+    console.error('Error in API request:', error);
+  } finally {
+    Router.refresh();
+  }
+};
+
     
     return(
         <div>
