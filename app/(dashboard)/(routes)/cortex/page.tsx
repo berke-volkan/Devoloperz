@@ -18,7 +18,7 @@ import { cn } from "@/lib/utils";
 import { OpenAI } from 'openai';
 
 const openai = new OpenAI({
-apiKey: "sk-61B0p5iYw4YKZwY20fmOAp4qxQtT4TLb)",
+apiKey: process.env.open,
 baseURL: 'https://api.h10.pro'
 })
 const msg: string[] = [];
