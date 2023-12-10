@@ -7,6 +7,7 @@ import { useAuth } from "@clerk/nextjs";
 
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import {useTheme} from "next-themes"
 
 const font = Montserrat({
     weight:"600",
@@ -15,6 +16,7 @@ const font = Montserrat({
 
 export const LandingNavBar = () => {
     const { isSignedIn } = useAuth();
+    const {theme,setTheme} = useTheme();
     return(
         <nav className="p-4 bg-transparent flex items-center justify-between">
             <Link href={"/"} className="flex items-center">
@@ -40,6 +42,14 @@ export const LandingNavBar = () => {
                         Our blog
                     </Button>
                 </Link>
+                <span>
+                    <span onClick={()=> setTheme("dark")}>
+                      Dark
+                    </span>|
+                    <span onClick={()=> setTheme("light")}>
+                        Light
+                    </span>| ({theme})
+                </span>
             </div>
         </nav>
     )
