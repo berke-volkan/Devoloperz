@@ -1,8 +1,4 @@
-// app/api/cortex/page.tsx
 import { NextApiRequest, NextApiResponse } from 'next';
-
-// Your code here
-
 import axios from 'axios';
 import { NextResponse } from 'next/server';
 
@@ -21,16 +17,20 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       },
       headers: {
         'api-key': api_key,
+        'Content-Type': 'application/json', // Ensure the correct content type
       },
       maxContentLength: Infinity,
       maxBodyLength: Infinity,
     });
-    console.log(response.data["choices"][0])
+
+    console.log(response.data["choices"][0]);
+
     // If the request is successful, respond with JSON using NextResponse.json
     return NextResponse.json({ resp: JSON.stringify(response.data["choices"][0]) });
   } catch (error) {
     console.error('Error in API request:', error);
+    
     // Handle the error if needed
     return NextResponse.json({ error: 'Internal Server Error' });
   }
-}
+};
