@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Montserrat } from "next/font/google";
 import { cn } from "@/lib/utils";
-import { AtomIcon, Code, ImageIcon, LayoutDashboard, MessageSquare, MusicIcon, Settings, VideoIcon } from "lucide-react";
+import { AtomIcon, Code, Code2Icon, ImageIcon, LayoutDashboard, MessageSquare, MusicIcon, Settings, VideoIcon } from "lucide-react";
 import { usePathname } from "next/navigation";
 const montserrat = Montserrat({
     weight:["600"],
@@ -35,6 +35,12 @@ const routes=[
         icon:MessageSquare,
         href:"/l",
         color:"text-violet-700"
+   },
+   {
+    label:"Rooms",
+    icon:Code2Icon,
+    href:"/rooms",
+    color:"text-red-700"
    },
 
    {
