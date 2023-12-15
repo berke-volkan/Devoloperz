@@ -82,7 +82,7 @@ const App: React.FC = () => {
       const doc = yjsDocs[roomId];
       const provider = new WebrtcProvider(roomId, doc);
       providerRef.current = provider;
-      
+
       const type = doc.getText('monaco');
       const model = editorRef.current.getModel();
 
@@ -119,8 +119,8 @@ const App: React.FC = () => {
         title="Rooms"
         description="Enter your room id and join the room"
         icon={CodeIcon}
-        iconColor="text-red-700"
-        bgColor="bg-red-700/10"
+        iconColor="text-orange-700"
+        bgColor="bg-orange-700/10"
       />
       <div className="flex items-center space-x-4">
         <input
@@ -131,7 +131,7 @@ const App: React.FC = () => {
           className="p-2 border border-gray-300 rounded-lg"
         />
         <button onClick={handleSubmitRoomChange} className="p-2 bg-blue-500 text-white rounded-lg">
-          Create/Change Room
+          Change Room
         </button>
       </div>
       {roomIdentifier && (
@@ -149,3 +149,4 @@ const AuthenticatedApp: React.FC = () => (
 );
 
 export default AuthenticatedApp;
+
