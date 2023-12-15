@@ -87,11 +87,17 @@ useEffect(() => {
         </button>
       </div>
         {messages.map((message) => (
-          <div 
-          key={message.id}
-          className={cn("p-10 w-full flex item-start gap-x-10 mt-4 rounded-lg",message.username !== user.firstName?.substring(0, 5)? "bg-white border border-black/10" : "bg-muted")}>
-            <UserAvatar/>{message.username} - <span className="text-gray-500">{message.timestamp}</span> - {message.text}
-          </div>
+         <div 
+  key={message.id}
+  className={cn(
+    "p-10 w-full flex item-start gap-x-10 mt-4 rounded-lg",
+    message.username !== (user?.firstName?.substring(0, 5) ?? "anonim") 
+      ? "bg-white border border-black/10" 
+      : "bg-muted"
+  )}
+>
+  <UserAvatar/>{message.username} - <span className="text-gray-500">{message.timestamp}</span> - {message.text}
+</div>
         ))}
     </div>
   );
