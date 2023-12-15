@@ -1,7 +1,7 @@
 "use client
 
 import { useRef } from 'react';
-import Editor, { OnMount } from "@monaco-editor/react";
+import {Editor,  OnMount } from "@monaco-editor/react";
 import * as y from 'yjs';
 import { WebrtcProvider } from 'y-webrtc';
 import { MonacoBinding } from 'y-monaco';
