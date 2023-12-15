@@ -5,6 +5,8 @@ import { Heading } from '@/components/heading';
 import { CodeIcon } from 'lucide-react';
 import { getDatabase, ref, onValue, push } from 'firebase/database';
 import { initializeApp } from "firebase/app";
+import { UserAvatar } from '@/components/user-avatar';
+import { cn } from '@/lib/utils';
 
 const firebaseConfig = {
   apiKey: "AIzaSyBq0UtNaMQ9W2yrOakjutO47WZjJgH4bUw",
@@ -84,13 +86,13 @@ useEffect(() => {
           Send
         </button>
       </div>
-      <div className="max-h-96 overflow-y-auto bg-gray-200 p-4 rounded-lg mb-4 mt-4">
         {messages.map((message) => (
-          <div key={message.id} className="mb-2">
-            {message.username} - <span className="text-gray-500">{message.timestamp}</span> - {message.text}
+          <div 
+          key={message.id}
+          className={cn("p-10 w-full flex item-start gap-x-10 mt-4 rounded-lg",message.username !== user.firstName?.substring(0, 5)? "bg-white border border-black/10" : "bg-muted")}>
+            <UserAvatar/>{message.username} - <span className="text-gray-500">{message.timestamp}</span> - {message.text}
           </div>
         ))}
-      </div>
     </div>
   );
 };
