@@ -1,3 +1,4 @@
+"use client"
 import { useRef } from 'react';
 import Editor, { OnMount } from "@monaco-editor/react";
 import * as y from 'yjs';
