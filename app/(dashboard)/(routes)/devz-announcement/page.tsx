@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { useUser } from '@clerk/clerk-react';
 import { Heading } from '@/components/heading';
-import { BadgeCheck, BadgeCheckIcon, CodeIcon, MessageSquare, Shield } from 'lucide-react';
+import { BadgeCheck, BadgeCheckIcon, BadgeInfo, BadgeInfoIcon, CodeIcon, InfoIcon, MessageSquare, Shield } from 'lucide-react';
 import { getDatabase, ref, onValue, push } from 'firebase/database';
 import { initializeApp } from "firebase/app";
 import { UserAvatar } from '@/components/user-avatar';
@@ -47,14 +47,14 @@ const App = () => {
       lastname: user.lastName,
     };
 
-    const messagesRef = ref(database, 'messages');
+    const messagesRef = ref(database, 'announcements');
     push(messagesRef, message);
 
     setNewMessage('');
   };
 
 useEffect(() => {
-  const msgRef = ref(database, 'messages');
+  const msgRef = ref(database, 'announcements');
   const unsubscribe = onValue(msgRef, (snapshot) => {
     const data = snapshot.val();
     const formattedData = data
@@ -71,9 +71,9 @@ useEffect(() => {
     <>
     <div className="container mx-auto p-4">
       <Heading
-        title="Chat Room"
-        description="Chat With Devs!"
-        icon={MessageSquare}
+        title="Devoloperz announcements"
+        description="Latest announcements from Devoplerz"
+        icon={InfoIcon}
         iconColor="text-green-700"
         bgColor="bg-green-700/10"
       />
@@ -89,22 +89,23 @@ useEffect(() => {
   )}
 >
   {message.lastname === "Admin" && <Shield className="text-green-500"/> }
-  {message.lastname === "Verified" && <BadgeCheck className="text-green-500" /> }
-  <UserAvatar />{message.username} - <span className="text-gray-500">{message.timestamp}</span> - {message.text}
+  {message.username} - <span className="text-gray-500">{message.timestamp}</span> - {message.text}
 </div>
         ))}
     </div>
     <div className="flex items-center space-x-4">
-    <input
+    
+    { user?.lastName=== "Admin" &&    
+    <><input
       type="text"
       placeholder="Type your message"
       value={newMessage}
       onChange={(e) => setNewMessage(e.target.value)}
       className="p-2 border border-gray-300 rounded-lg w-full"
-    />
-    <button onClick={handleSendMessage} className="p-2 bg-blue-500 text-white rounded-lg">
+    /><button onClick={handleSendMessage} className="p-2 bg-blue-500 text-white rounded-lg">
       Send
-    </button>
+    </button> </>}
+
   </div>
     </>
   );

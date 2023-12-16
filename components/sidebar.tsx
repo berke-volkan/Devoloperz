@@ -8,6 +8,7 @@ import {
   Code,
   Code2Icon,
   ImageIcon,
+  InfoIcon,
   LayoutDashboard,
   LinkIcon,
   MessageSquare,
@@ -48,6 +49,12 @@ const routes = [
     icon: LayoutDashboard,
     href: "/dashboard",
     color: "text-sky-500",
+  },
+  {
+    label:"Announcements",
+    icon:InfoIcon,
+    href:"/devz-announcement",
+    color:"text-green-700",
   },
   {
     label: "Chat Room",
