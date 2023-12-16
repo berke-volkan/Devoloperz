@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { useUser } from '@clerk/clerk-react';
 import { Heading } from '@/components/heading';
-import { CodeIcon } from 'lucide-react';
+import { CodeIcon, LinkIcon } from 'lucide-react';
 import { getDatabase, ref, onValue, push } from 'firebase/database';
 import { initializeApp } from "firebase/app";
 
@@ -59,9 +59,9 @@ const App: React.FC = () => {
       <Heading
         title="URL Shortener"
         description="Shorten your URLs with ease"
-        icon={CodeIcon}
-        iconColor="text-orange-700"
-        bgColor="bg-orange-700/10"
+        icon={LinkIcon}
+        iconColor="text-green-700"
+        bgColor="bg-green-700/10"
       />
       {/* URL shortening form */}
       <form onSubmit={handleSubmit} className="flex items-center space-x-4 mt-4">

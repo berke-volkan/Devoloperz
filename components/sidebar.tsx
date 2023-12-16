@@ -9,10 +9,12 @@ import {
   Code2Icon,
   ImageIcon,
   LayoutDashboard,
+  LinkIcon,
   MessageSquare,
   MusicIcon,
   Settings,
   SettingsIcon,
+  Swords,
   VideoIcon,
 } from "lucide-react";
 import { usePathname } from "next/navigation";
@@ -49,7 +51,7 @@ const routes = [
   },
   {
     label: "Chat Room",
-    icon: Code,
+    icon: MessageSquare,
     href: "/chat",
     color: "text-green-700",
   },
@@ -61,7 +63,7 @@ const routes = [
   },
   {
     label: "Link",
-    icon: MessageSquare,
+    icon: LinkIcon,
     href: "/l",
     color: "text-violet-700",
   },
@@ -70,6 +72,11 @@ const routes = [
     icon: Code2Icon,
     href: "/rooms",
     color: "text-red-700",
+  },
+  {
+    label: "Minigames",
+    icon:Swords,
+    href: "/minigames",
   },
   {
     label: "Settings",

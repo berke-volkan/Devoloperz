@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { useUser } from '@clerk/clerk-react';
 import { Heading } from '@/components/heading';
-import { CodeIcon } from 'lucide-react';
+import { BadgeCheck, BadgeCheckIcon, CodeIcon, MessageSquare, Shield } from 'lucide-react';
 import { getDatabase, ref, onValue, push } from 'firebase/database';
 import { initializeApp } from "firebase/app";
 import { UserAvatar } from '@/components/user-avatar';
@@ -43,6 +43,7 @@ const App = () => {
       text: newMessage,
       timestamp: new Date().toISOString(),
       username: user.firstName?.substring(0, 5), // Add a nullish coalescing operator
+      lastname: user.lastName,
     };
 
     const messagesRef = ref(database, 'messages');
@@ -66,26 +67,16 @@ useEffect(() => {
 
 
   return (
+    <>
     <div className="container mx-auto p-4">
       <Heading
-        title="Coding Room - Web3"
-        description="Blockchain based coding room"
-        icon={CodeIcon}
-        iconColor="text-orange-700"
-        bgColor="bg-orange-700/10"
+        title="Chat Room"
+        description="Chat With Devs!"
+        icon={MessageSquare}
+        iconColor="text-green-700"
+        bgColor="bg-green-700/10"
       />
-      <div className="flex items-center space-x-4">
-        <input
-          type="text"
-          placeholder="Type your message"
-          value={newMessage}
-          onChange={(e) => setNewMessage(e.target.value)}
-          className="p-2 border border-gray-300 rounded-lg w-full"
-        />
-        <button onClick={handleSendMessage} className="p-2 bg-blue-500 text-white rounded-lg">
-          Send
-        </button>
-      </div>
+      
         {messages.map((message) => (
          <div 
   key={message.id}
@@ -96,11 +87,27 @@ useEffect(() => {
       : "bg-muted"
   )}
 >
-  <UserAvatar/>{message.username} - <span className="text-gray-500">{message.timestamp}</span> - {message.text}
+  {message.lastname === "Admin" && <Shield className="text-green-500" /> }
+  {message.lastname === "Verified" && <BadgeCheck className="text-green-500" /> }
+  <UserAvatar />{message.username} - <span className="text-gray-500">{message.timestamp}</span> - {message.text}
 </div>
         ))}
     </div>
+    <div className="flex items-center space-x-4">
+    <input
+      type="text"
+      placeholder="Type your message"
+      value={newMessage}
+      onChange={(e) => setNewMessage(e.target.value)}
+      className="p-2 border border-gray-300 rounded-lg w-full"
+    />
+    <button onClick={handleSendMessage} className="p-2 bg-blue-500 text-white rounded-lg">
+      Send
+    </button>
+  </div>
+    </>
   );
+  
 };
 
 const AuthenticatedApp = () => (

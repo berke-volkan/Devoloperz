@@ -10,23 +10,15 @@ const Sidebar = () => {
 
   return (
     <div className="container mx-auto p-4">
-      {String(user.user?.id) === "user_2YiyVcOKsa4Jb8D8DNP2ZvZeo6A" && (
-        <h1>
-          Bilgi: Şuanda test kullanisindasiniz. Bu kullanici test bitince silinecek
-        </h1>
-      )}
-      {String(user.user?.lastName) === "Admin" && (
         <div className="container mx-auto p-4">
           <Heading
-            title="Manage the Blog"
-            description="Manage the blog easily!"
+            title="Settings"
+            description="Set up your exprience!"
             icon={SettingsIcon}
-            iconColor="text-red-700"
             bgColor="bg-red-700/10"
           />
-          <Empty label="Blog not devoloped" />
+          <Empty label="Nothing to see yet" />
         </div>
-      )}
     </div>
   );
 };
