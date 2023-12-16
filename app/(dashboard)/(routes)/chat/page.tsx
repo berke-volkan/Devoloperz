@@ -25,6 +25,7 @@ interface Message {
   text: string;
   timestamp: string;
   username: string;
+  lastname: string; // Add the 'lastname' property to the Message type
   // Add any other properties you might have
 }
 
