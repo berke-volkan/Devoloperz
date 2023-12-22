@@ -1,7 +1,7 @@
 "use client";
 import * as z from "zod"
 import { Heading } from "@/components/heading"
-import { AtomIcon, Code, ImageIcon, Loader, MessageSquare } from "lucide-react"
+import { AtomIcon, Bot, Code, ImageIcon, Loader, MessageSquare } from "lucide-react"
 import { useForm } from "react-hook-form"
 import { FormSchema } from "./constants";
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -16,8 +16,10 @@ import LoaderNesia from "@/components/loader";
 import { cn } from "@/lib/utils"; 
 import { BotAvatar } from "@/components/bot-avatar";
 import {UserAvatar} from "@/components/user-avatar";
-let msg: string[] = [];
-// Import statements
+import {Popover, PopoverTrigger, PopoverContent} from "@nextui-org/popover";
+import { Badge } from "@nextui-org/badge";
+import {Spacer} from "@nextui-org/spacer";
+import {Card, CardHeader, CardBody, CardFooter, Divider, Link, Image} from "@nextui-org/react";
 
 const ConversationPage = () => {
     const router = useRouter();
@@ -56,6 +58,7 @@ const ConversationPage = () => {
   
     return (
       <div>
+        
         <Heading
           title="Devz-Ai"
           description="Create your apps faster with AI! Powered by Cortex"
@@ -111,7 +114,73 @@ const ConversationPage = () => {
                     index % 2 === 0 ? "bg-white border border-black/10" : "bg-muted"
                   )}
                 >
-                  {index % 2 !== 0 ? <BotAvatar /> : <UserAvatar />}
+                  {index % 2 !== 0 ? <div>
+                    <div>
+        <Popover showArrow
+      backdrop="blur"
+      placement="right"
+      classNames={{
+        base: [  
+          // arrow color
+          "before:bg-default-200"
+        ],
+        content: [
+          "py-3 px-4 border border-default-200",
+          "bg-blue-500 text-default-100",
+          "dark:from-default-100 dark:to-default-50",
+        ],
+      }}>
+          <PopoverTrigger>
+        <Badge
+          isOneChar
+          content={<Bot className="text-green-500" />}
+          color="success"
+          placement="top-right"
+        >
+          
+          <Spacer x={7} />
+        </Badge>
+        </PopoverTrigger>
+        <PopoverContent>
+        <Card className="max-w-[400px]">
+      <CardHeader className="flex gap-3">
+        <Image
+          alt="nextui logo"
+          height={90}
+          radius="sm"
+          src="https://th.bing.com/th?id=OIP.5Fh8xHKNuGyOEQgBGy0OBAHaFc&w=291&h=214&c=8&rs=1&qlt=90&o=6&dpr=1.3&pid=3.1&rm=2"
+          width={90}
+        />
+        <div className="flex flex-col">
+          <p className="text-md">GPT - Vision</p>
+          <p className="text-small text-default-500">Thanks to our partner Cortex</p>
+        </div>
+      </CardHeader>
+      <Divider/>
+      <CardBody>
+        <p>We use Cortex based GPT4 - Vision ai.This is most expensive ai :)</p>
+        <Spacer x={4}/>
+        <p>GPT-4 with Vision, sometimes referred to as GPT-4V or gpt-4-vision-preview in the API, allows the model to take in images and answer questions about them. Historically, language model systems have been limited by taking in a single input modality, text. For many use cases, this constrained the areas where models like GPT-4 could be used.</p>
+        <p>İf you want cheap gpt-4 contact staffs!</p>
+      </CardBody>
+      <Divider/>
+      <CardFooter>
+        <Link
+          isExternal
+          showAnchorIcon
+          href="https://cortex.fun/premium"
+        >
+          Check our partner!
+        </Link>
+      </CardFooter>
+    </Card>
+
+        </PopoverContent>
+        </Popover>
+         <BotAvatar/>
+        <Spacer x={4}/>
+      </div>
+                    </div> : <UserAvatar />}
                   <p className="text-sm">{message}</p>
                 </div>
               ))}

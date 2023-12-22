@@ -3,51 +3,137 @@
 import React, { useState, useEffect } from 'react';
 import { useUser } from '@clerk/clerk-react';
 import { Heading } from '@/components/heading';
-import { CodeIcon, LinkIcon } from 'lucide-react';
+import { Line } from 'react-chartjs-2';
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+} from 'chart.js';
 import { getDatabase, ref, onValue, push } from 'firebase/database';
 import { initializeApp } from "firebase/app";
+import { LinkIcon } from 'lucide-react';
+
+// ChartJS register components
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
+);
+
+// Chart options
+export const options = {
+  responsive: true,
+  plugins: {
+    legend: {
+      position: 'top' as const,
+    },
+    title: {
+      display: true,
+      text: 'Link Usage',
+    },
+  },
+};
 
 // Firebase configuration and initialization
 const firebaseConfig = {
   apiKey: "AIzaSyBq0UtNaMQ9W2yrOakjutO47WZjJgH4bUw",
   authDomain: "devoloperz.firebaseapp.com",
+  databaseURL: "https://devoloperz-default-rtdb.firebaseio.com",
   projectId: "devoloperz",
   storageBucket: "devoloperz.appspot.com",
   messagingSenderId: "851290003802",
-  appId: "1:851290003802:web:4761f04f7a1b4b63273b63"
+  appId: "1:851290003802:web:72fc84a7a02e0371273b63"
 };
+
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
-
-// App.tsx
-// ... (previous imports)
 
 interface Link {
   shortLink: string;
   originalUrl: string;
+  id: string;
+  usage: number; // Changed from string to number
 }
+
 
 const App: React.FC = () => {
   const [shortLinks, setShortLinks] = useState<Link[]>([]);
   const [longUrl, setLongUrl] = useState('');
   const { user } = useUser();
+  const [chartData, setChartData] = useState({
+    labels: [],
+    datasets: [
+      {
+        label: 'Link Usages',
+        data: [],
+        borderColor: 'rgb(255, 99, 132)',
+        backgroundColor: 'rgba(255, 99, 132, 0.5)',
+      }
+    ],
+  });
+  
+  // Function to fetch link usage data from Firebase
+  useEffect(() => {
+    const linksRef = ref(database, 'links');
+    onValue(linksRef, (snapshot) => {
+      const data = snapshot.val();
+      const fetchedLinks: Link[] = [];
+      const labels: string[] = [];
+      const usageData: number[] = [];
+      for (let id in data) {
+        const link = data[id];
+        fetchedLinks.push(link);
+        labels.push(link.shortLink);
+        usageData.push(link.usage);
+      }
+      setShortLinks(fetchedLinks);
+      setChartData({
+        labels,
+        datasets: [
+          {
+            label: 'Link Usages',
+            data: usageData,
+            borderColor: 'rgb(255, 99, 132)',
+            backgroundColor: 'rgba(255, 99, 132, 0.5)',
+          }
+        ],
+      });
+    });
+  }, []);
 
   // Function to handle URL shortening form submission
-  const handleSubmit = async (event: React.FormEvent) => {
-    event.preventDefault();
-    try {
-      const shortCode = generateShortCode();
-      const linksRef = ref(database, 'links');
-      const link = `${shortCode}`;
-      const data: Link = { shortLink: link, originalUrl: longUrl };
-      push(linksRef, data);
-      setShortLinks([...shortLinks, data]); // Update short links state
-      alert(`Short URL: ${window.location.origin}/l/${shortCode}`);
-    } catch (error) {
-      console.error('An error occurred during URL shortening:', error);
-      alert('An error occurred. Please try again later.');
-    }
-  };
+// Function to handle URL shortening form submission
+// Function to handle URL shortening form submission
+const handleSubmit = async (event: React.FormEvent) => {
+  event.preventDefault();
+  try {
+    const shortCode = generateShortCode();
+    const linksRef = ref(database, 'links');
+    const link = `${shortCode}`;
+    const CreatorId = user?.id || 'anonymous';
+    const usage = 0;
+    const newLinkData: Link = { shortLink: link, originalUrl: longUrl, id: CreatorId, usage: usage };
+    // Kullanımı push(linksRef, newLinkData) olarak değiştirin
+    const newLinkRef = await push(linksRef, newLinkData);
+    setShortLinks([...shortLinks, newLinkData]); // Update short links state
+    setLongUrl(''); // Clear the input field
+    alert(`Short URL: ${link}`);
+  } catch (error) {
+    console.error('An error occurred during URL shortening:', error);
+    alert('An error occurred. Please try again later.');
+  }
+};
+
+
 
   // Function to generate a short code
   const generateShortCode = (): string => {
@@ -60,8 +146,7 @@ const App: React.FC = () => {
         title="URL Shortener"
         description="Shorten your URLs with ease"
         icon={LinkIcon}
-        iconColor="text-green-700"
-        bgColor="bg-green-700/10"
+        // icon and other props
       />
       {/* URL shortening form */}
       <form onSubmit={handleSubmit} className="flex items-center space-x-4 mt-4">
@@ -77,33 +162,39 @@ const App: React.FC = () => {
           Shorten URL
         </button>
       </form>
-      {/* Display the list of short links */}
-      <div className="max-h-96 overflow-y-auto bg-white p-4 rounded-lg shadow-md mb-4 mt-4">
-        {shortLinks.map((link, index) => (
-          <div key={index} className="mb-2">
-            <div className="flex items-center justify-between">
-              <div>
-                <span className="font-semibold">Short Link:</span>{' '}
-                <a href={link.shortLink} target="_blank" rel="noopener noreferrer" className="text-blue-500">
-                  {link.shortLink}
-                </a>
-              </div>
-              <div>
-                <span className="font-semibold">Original URL:</span>{' '}
-                <a href={link.originalUrl} target="_blank" rel="noopener noreferrer" className="text-blue-500">
-                  {link.originalUrl}
-                </a>
-              </div>
-            </div>
+     {/* Display the list of short links */}
+<div className="max-h-96 overflow-y-auto bg-white p-4 rounded-lg shadow-md mb-4 mt-4">
+  {shortLinks.length > 0 ? (
+    shortLinks.map((link, index) => (
+      <div key={index} className="mb-4 p-4 border-b last:border-b-0">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center">
+          <div className="mb-2 md:mb-0">
+            <span className="font-semibold text-gray-700">Short Link:</span>{' '}
+            <a href={link.shortLink} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:text-blue-600 transition-colors">
+              {link.shortLink}
+            </a>
           </div>
-        ))}
+          <div>
+            <span className="font-semibold text-gray-700">Original URL:</span>{' '}
+            <a href={link.originalUrl} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:text-blue-600 transition-colors truncate">
+              {link.originalUrl}
+            </a>
+          </div>
+        </div>
+        
       </div>
+    ))
+  ) : (
+    <p className="text-center text-gray-500">No short links created yet.</p>
+  )}
+</div>
+   {shortLinks.length > 0 && (
+     <Line options={options} data={chartData} />
+   )}
+   
+
     </div>
   );
 };
 
-const AuthenticatedApp: React.FC = () => (
-  <App />
-);
-
-export default AuthenticatedApp;
+export default App;

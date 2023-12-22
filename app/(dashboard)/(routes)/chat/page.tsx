@@ -104,7 +104,8 @@ const RenderMessage: React.FC<{ message: Message }> = ({ message }) => {
       <div className="px-1 py-2 ">
         <div className="text-small font-bold text-white">Verified Badge</div>
         <div className="text-tiny text-white">This user is verified  </div>
-        <div className="text-tiny text-white">This user showed his talent!</div>
+        <div className="text-tiny text-white">This user showed his talent!
+        </div>
       </div>
 
       </PopoverContent>
