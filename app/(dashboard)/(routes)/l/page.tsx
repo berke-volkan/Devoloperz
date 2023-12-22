@@ -30,7 +30,7 @@ ChartJS.register(
 );
 
 // Chart options
-export const options = {
+ const options = {
   responsive: true,
   plugins: {
     legend: {
