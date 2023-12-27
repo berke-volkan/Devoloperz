@@ -2,10 +2,11 @@
 
 import {Card, CardHeader, CardBody, CardFooter, Avatar, Button} from "@nextui-org/react";
 
+import React, { useState } from 'react';
 
 
 export const LandingContent = () => {
-    const [isFollowed, setIsFollowed] = React.useState(false);
+    const [isFollowed, setIsFollowed] =useState(false);
     return(
         <div className="px-10 pb-20">
             <h2 className="text-center text-4xl text-white font-extrabold  mb-10">
