@@ -17,13 +17,7 @@ export default function App() {
               <p style={{ color: '#888' }}>@zoeylang</p>
             </div>
           </div>
-          <Button
-            ghost={!isFollowed}
-            color="primary"
-            onClick={() => setIsFollowed(!isFollowed)}
-          >
-            {isFollowed ? "Unfollow" : "Follow"}
-          </Button>
+          
         </div>
         <div style={{ padding: '1rem' }}>
           <p style={{ color: '#666' }}>
