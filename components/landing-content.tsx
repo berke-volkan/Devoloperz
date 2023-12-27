@@ -16,14 +16,6 @@ export default function App() {
               <h5 className="text-sm text-gray-500">@zoeylang</h5>
             </div>
           </div>
-          <Button
-            className={isFollowed ? "bg-transparent text-blue-600 border-blue-600" : "bg-blue-600 text-white"}
-            auto
-            flat={isFollowed}
-            onClick={() => setIsFollowed(!isFollowed)}
-          >
-            {isFollowed ? "Unfollow" : "Follow"}
-          </Button>
         </CardHeader>
         <CardBody className="p-4">
           <p className="text-sm text-gray-600">
