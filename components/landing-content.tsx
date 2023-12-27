@@ -9,7 +9,7 @@ export default function App() {
   return (
     <div style={{ backgroundColor: '#000', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
       <Card style={{ maxWidth: "400px", backgroundColor: '#fff' }}>
-        <Card.Header style={{ justifyContent: 'space-between', alignItems: 'center' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem' }}>
           <div style={{ display: 'flex', alignItems: 'center' }}>
             <Avatar bordered src="/logo.png" />
             <div style={{ marginLeft: '1rem' }}>
@@ -24,19 +24,19 @@ export default function App() {
           >
             {isFollowed ? "Unfollow" : "Follow"}
           </Button>
-        </Card.Header>
-        <Card.Body style={{ padding: '1rem' }}>
+        </div>
+        <div style={{ padding: '1rem' }}>
           <p style={{ color: '#666' }}>
             Frontend developer and UI/UX enthusiast. Join me on this coding adventure!
           </p>
           <p style={{ color: '#666', marginTop: '1rem' }}>
             #FrontendWithZoey 💻
           </p>
-        </Card.Body>
-        <Card.Footer style={{ justifyContent: 'space-between', alignItems: 'center' }}>
+        </div>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem' }}>
           <p style={{ color: '#888' }}>4 Following</p>
           <p style={{ color: '#888' }}>97.1K Followers</p>
-        </Card.Footer>
+        </div>
       </Card>
     </div>
   );
