@@ -30,7 +30,7 @@ ChartJS.register(
 );
 
 // Chart options
-export const options = {
+ const options = {
   responsive: true,
   plugins: {
     legend: {
@@ -63,24 +63,33 @@ interface Link {
   id: string;
   usage: number; // Changed from string to number
 }
+interface ChartData {
+  labels: string[];
+  datasets: {
+    label: string;
+    data: number[];
+    borderColor: string;
+    backgroundColor: string;
+  }[];
+}
 
 
 const App: React.FC = () => {
   const [shortLinks, setShortLinks] = useState<Link[]>([]);
   const [longUrl, setLongUrl] = useState('');
   const { user } = useUser();
-  const [chartData, setChartData] = useState({
-    labels: [],
-    datasets: [
-      {
-        label: 'Link Usages',
-        data: [],
-        borderColor: 'rgb(255, 99, 132)',
-        backgroundColor: 'rgba(255, 99, 132, 0.5)',
-      }
-    ],
-  });
-  
+  // chartData state'inin başlangıç değeri ve tipi
+const [chartData, setChartData] = useState<ChartData>({
+  labels: [],
+  datasets: [
+    {
+      label: 'Link Usages',
+      data: [],
+      borderColor: 'rgb(255, 99, 132)',
+      backgroundColor: 'rgba(255, 99, 132, 0.5)',
+    }
+  ],
+});
   // Function to fetch link usage data from Firebase
   useEffect(() => {
     const linksRef = ref(database, 'links');

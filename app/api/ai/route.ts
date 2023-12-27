@@ -3,7 +3,7 @@ import { OpenAI } from "openai";
 
 const openai = new OpenAI({
     apiKey: "this_is_magic_key",
-    baseURL: "https://api.h10.pro",
+    baseURL: "https://api.cortexai.io",
 });
 
 export async function POST(req: Request) {

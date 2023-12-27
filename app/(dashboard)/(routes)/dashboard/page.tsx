@@ -6,9 +6,16 @@ import { useRouter } from "next/navigation";
 
 const tools=[
   {
-    label:"Code Generation",
+    label:"Check News",
     icon:Code,
-    href:"/code",
+    href:"/devz-announcement",
+    color:"text-green-700",
+    bgColor:"bg-green-700/10"
+  },
+  {
+    label:"Chat with Devoloperz",
+    icon:MessageSquare,
+    href:"/chat",
     color:"text-green-700",
     bgColor:"bg-green-700/10"
   }
