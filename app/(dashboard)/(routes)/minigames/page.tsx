@@ -1,12 +1,10 @@
-import { usePathname } from "next/navigation";
-import { useUser } from "@clerk/nextjs";
+
 import { Heading } from '@/components/heading';
 import { CodeIcon, SettingsIcon, Swords } from 'lucide-react';
 import { Empty } from '@/components/empty';
 
 const Sidebar = () => {
-  const pathname = usePathname();
-  const user = useUser();
+
   
   return (
     <div className="container mx-auto p-4">
