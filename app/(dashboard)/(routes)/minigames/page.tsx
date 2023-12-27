@@ -14,7 +14,6 @@ const Sidebar = () => {
         icon={Swords}
         bgColor="bg-red-700/10"
       />
-      <Empty label="Nothing to see yet :(" />
       {/* iDev.Games Responsive Embed Code for SillySnake */}
       <div style={{ position: 'relative', height: '0', overflow: 'hidden', paddingBottom: '56.25%' }}>
         <iframe 
