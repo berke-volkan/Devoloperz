@@ -1,14 +1,11 @@
-"use client";
-
+import React,{useState} from "react";
 import {Card, CardHeader, CardBody, CardFooter, Avatar, Button} from "@nextui-org/react";
 
-import React, { useState } from 'react';
+export default function App() {
+  const [isFollowed, setIsFollowed] = useState(false);
 
-
-export const LandingContent = () => {
-    const [isFollowed, setIsFollowed] =useState(false);
-    return(
-            <Card className="max-w-[340px]">
+  return (
+    <Card className="max-w-[340px]">
       <CardHeader className="justify-between">
         <div className="flex gap-5">
           <Avatar isBordered radius="full" size="md" src="/avatars/avatar-1.png" />
@@ -50,7 +47,6 @@ export const LandingContent = () => {
         </div>
       </CardFooter>
     </Card>
-    )
+  );
 }
 
-export default LandingContent
