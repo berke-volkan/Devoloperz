@@ -1,7 +1,6 @@
 "use client"
-
 import React, { useState } from "react";
-import { Card, Text, Avatar, Button } from "@nextui-org/react";
+import { Card, Avatar, Button } from "@nextui-org/react";
 
 export default function App() {
   const [isFollowed, setIsFollowed] = useState(false);
@@ -13,12 +12,11 @@ export default function App() {
           <div style={{ display: 'flex', alignItems: 'center' }}>
             <Avatar bordered src="/logo.png" />
             <div style={{ marginLeft: '1rem' }}>
-              <Text b size="1rem">Zoey Lang</Text>
-              <Text css={{ color: '$accents7' }}>@zoeylang</Text>
+              <p style={{ fontSize: '1rem', fontWeight: 'bold' }}>Zoey Lang</p>
+              <p style={{ color: '#888' }}>@zoeylang</p>
             </div>
           </div>
           <Button
-            auto
             ghost={!isFollowed}
             color="primary"
             onClick={() => setIsFollowed(!isFollowed)}
@@ -27,19 +25,18 @@ export default function App() {
           </Button>
         </Card.Header>
         <Card.Body css={{ py: '$10' }}>
-          <Text css={{ color: '$accents6' }}>
+          <p style={{ color: '#666' }}>
             Frontend developer and UI/UX enthusiast. Join me on this coding adventure!
-          </Text>
-          <Text css={{ color: '$accents6', mt: '$4' }}>
+          </p>
+          <p style={{ color: '#666', marginTop: '1rem' }}>
             #FrontendWithZoey 💻
-          </Text>
+          </p>
         </Card.Body>
         <Card.Footer css={{ justifyContent: 'space-between', alignItems: 'center' }}>
-          <Text css={{ color: '$accents7' }}>4 Following</Text>
-          <Text css={{ color: '$accents7' }}>97.1K Followers</Text>
+          <p style={{ color: '#888' }}>4 Following</p>
+          <p style={{ color: '#888' }}>97.1K Followers</p>
         </Card.Footer>
       </Card>
     </div>
   );
 }
-
