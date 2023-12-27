@@ -1,53 +1,49 @@
-"use client";
-import React,{useState} from "react";
-import {Card, CardHeader, CardBody, CardFooter, Avatar, Button} from "@nextui-org/react";
+import React, { useState } from "react";
+import { Card, CardHeader, CardBody, CardFooter, Avatar, Button } from "@nextui-org/react";
 
 export default function App() {
   const [isFollowed, setIsFollowed] = useState(false);
 
   return (
-    <Card className="max-w-[340px]">
-      <CardHeader className="justify-between">
-        <div className="flex gap-5">
-          <Avatar isBordered radius="full" size="md" src="/logo.png" />
-          <div className="flex flex-col gap-1 items-start justify-center">
-            <h4 className="text-small font-semibold leading-none text-default-600">Zoey Lang</h4>
-            <h5 className="text-small tracking-tight text-default-400">@zoeylang</h5>
+    <div className="flex justify-center items-center h-screen bg-gray-100">
+      <Card className="w-full max-w-xs bg-white shadow-md">
+        <CardHeader className="flex justify-between items-center p-4">
+          <div className="flex items-center space-x-4">
+            <Avatar isBordered size="lg" src="/logo.png" />
+            <div>
+              <h4 className="text-lg font-semibold text-gray-800">Zoey Lang</h4>
+              <h5 className="text-sm text-gray-500">@zoeylang</h5>
+            </div>
           </div>
-        </div>
-        <Button
-          className={isFollowed ? "bg-transparent text-foreground border-default-200" : ""}
-          color="primary"
-          radius="full"
-          size="sm"
-          variant={isFollowed ? "bordered" : "solid"}
-          onPress={() => setIsFollowed(!isFollowed)}
-        >
-          {isFollowed ? "Unfollow" : "Follow"}
-        </Button>
-      </CardHeader>
-      <CardBody className="px-3 py-0 text-small text-default-400">
-        <p>
-          Frontend developer and UI/UX enthusiast. Join me on this coding adventure!
-        </p>
-        <span className="pt-2">
-          #FrontendWithZoey 
-          <span className="py-2" aria-label="computer" role="img">
-            💻
-          </span>
-        </span>
-      </CardBody>
-      <CardFooter className="gap-3">
-        <div className="flex gap-1">
-          <p className="font-semibold text-default-400 text-small">4</p>
-          <p className=" text-default-400 text-small">Following</p>
-        </div>
-        <div className="flex gap-1">
-          <p className="font-semibold text-default-400 text-small">97.1K</p>
-          <p className="text-default-400 text-small">Followers</p>
-        </div>
-      </CardFooter>
-    </Card>
+          <Button
+            className={isFollowed ? "bg-transparent text-blue-600 border-blue-600" : "bg-blue-600 text-white"}
+            auto
+            flat={isFollowed}
+            onClick={() => setIsFollowed(!isFollowed)}
+          >
+            {isFollowed ? "Unfollow" : "Follow"}
+          </Button>
+        </CardHeader>
+        <CardBody className="p-4">
+          <p className="text-sm text-gray-600">
+            Frontend developer and UI/UX enthusiast. Join me on this coding adventure!
+          </p>
+          <div className="pt-4 flex items-center space-x-2">
+            <span className="text-sm text-gray-600">#FrontendWithZoey</span>
+            <span className="text-lg" role="img" aria-label="computer">💻</span>
+          </div>
+        </CardBody>
+        <CardFooter className="flex justify-between items-center p-4">
+          <div className="flex items-center space-x-1">
+            <p className="text-sm font-semibold text-gray-600">4</p>
+            <p className="text-sm text-gray-500">Following</p>
+          </div>
+          <div className="flex items-center space-x-1">
+            <p className="text-sm font-semibold text-gray-600">97.1K</p>
+            <p className="text-sm text-gray-500">Followers</p>
+          </div>
+        </CardFooter>
+      </Card>
+    </div>
   );
 }
-
