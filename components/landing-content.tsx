@@ -11,7 +11,7 @@ export default function App() {
       <Card style={{ maxWidth: "400px", backgroundColor: '#fff' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem' }}>
           <div style={{ display: 'flex', alignItems: 'center' }}>
-            <Avatar bordered src="/logo.png" />
+            <Avatar isBordered src="/logo.png" />
             <div style={{ marginLeft: '1rem' }}>
               <p style={{ fontSize: '1rem', fontWeight: 'bold' }}>Zoey Lang</p>
               <p style={{ color: '#888' }}>@zoeylang</p>
