@@ -1,42 +1,45 @@
-"use client";
+"use client"
+
 import React, { useState } from "react";
-import { Card, CardHeader, CardBody, CardFooter, Avatar, Button } from "@nextui-org/react";
+import { Card, Text, Avatar, Button } from "@nextui-org/react";
 
 export default function App() {
   const [isFollowed, setIsFollowed] = useState(false);
 
   return (
-    <div className="flex justify-center items-center h-screen bg-gray-100">
-      <Card className="w-full max-w-xs bg-white shadow-md">
-        <CardHeader className="flex justify-between items-center p-4">
-          <div className="flex items-center space-x-4">
-            <Avatar isBordered size="lg" src="/logo.png" />
-            <div>
-              <h4 className="text-lg font-semibold text-gray-800">Zoey Lang</h4>
-              <h5 className="text-sm text-gray-500">@zoeylang</h5>
+    <div style={{ backgroundColor: '#000', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <Card css={{ mw: "400px", backgroundColor: '#fff' }}>
+        <Card.Header css={{ justifyContent: 'space-between', alignItems: 'center' }}>
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <Avatar bordered src="/logo.png" />
+            <div style={{ marginLeft: '1rem' }}>
+              <Text b size="1rem">Zoey Lang</Text>
+              <Text css={{ color: '$accents7' }}>@zoeylang</Text>
             </div>
           </div>
-        </CardHeader>
-        <CardBody className="p-4">
-          <p className="text-sm text-gray-600">
+          <Button
+            auto
+            ghost={!isFollowed}
+            color="primary"
+            onClick={() => setIsFollowed(!isFollowed)}
+          >
+            {isFollowed ? "Unfollow" : "Follow"}
+          </Button>
+        </Card.Header>
+        <Card.Body css={{ py: '$10' }}>
+          <Text css={{ color: '$accents6' }}>
             Frontend developer and UI/UX enthusiast. Join me on this coding adventure!
-          </p>
-          <div className="pt-4 flex items-center space-x-2">
-            <span className="text-sm text-gray-600">#FrontendWithZoey</span>
-            <span className="text-lg" role="img" aria-label="computer">💻</span>
-          </div>
-        </CardBody>
-        <CardFooter className="flex justify-between items-center p-4">
-          <div className="flex items-center space-x-1">
-            <p className="text-sm font-semibold text-gray-600">4</p>
-            <p className="text-sm text-gray-500">Following</p>
-          </div>
-          <div className="flex items-center space-x-1">
-            <p className="text-sm font-semibold text-gray-600">97.1K</p>
-            <p className="text-sm text-gray-500">Followers</p>
-          </div>
-        </CardFooter>
+          </Text>
+          <Text css={{ color: '$accents6', mt: '$4' }}>
+            #FrontendWithZoey 💻
+          </Text>
+        </Card.Body>
+        <Card.Footer css={{ justifyContent: 'space-between', alignItems: 'center' }}>
+          <Text css={{ color: '$accents7' }}>4 Following</Text>
+          <Text css={{ color: '$accents7' }}>97.1K Followers</Text>
+        </Card.Footer>
       </Card>
     </div>
   );
 }
+
