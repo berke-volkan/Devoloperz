@@ -1,52 +1,59 @@
 "use client";
 
-import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
+import {Card, CardHeader, CardBody, CardFooter, Avatar, Button} from "@nextui-org/react";
 
-const testimonials=[
-    {
-        name:"Devoloperz",
-        title:"Ceo of Devoloperz",
-        description:"I love this plotform very much"
-    },    
-    {
-        name:"Devoloperz",
-        title:"Ceo of Devoloperz",
-        description:"I love this plotform very much"
-    },
-    {
-        name:"Devoloperz",
-        title:"Ceo of Devoloperz",
-        description:"I love this plotform very much"
-    },
-    {
-        name:"Devoloperz",
-        title:"Ceo of Devoloperz",
-        description:"I love this plotform very much"
-    }
-]
+
 
 export const LandingContent = () => {
+    const [isFollowed, setIsFollowed] = React.useState(false);
     return(
         <div className="px-10 pb-20">
             <h2 className="text-center text-4xl text-white font-extrabold  mb-10">
                 Famous Devolopers using devoloperz
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
-                {testimonials.map((item)=>(
-                    <Card key={item.description} className="bg-[#192339] border-none text-white">
-                        <CardHeader>
-                            <CardTitle className="flex items-center  gap-x-2">
-                                <div>
-                                    <p className="text-lg">{item.name}</p>
-                                    <p className="text-zinc-400 text-sm">{item.title}</p>
-                                </div>
-                            </CardTitle>
-                            <CardContent className="pt-4 px-0">
-                                {item.description}
-                            </CardContent>
-                        </CardHeader>
-                    </Card>
-                ))}
+                <Card className="max-w-[340px]">
+      <CardHeader className="justify-between">
+        <div className="flex gap-5">
+          <Avatar isBordered radius="full" size="md" src="/avatars/avatar-1.png" />
+          <div className="flex flex-col gap-1 items-start justify-center">
+            <h4 className="text-small font-semibold leading-none text-default-600">Zoey Lang</h4>
+            <h5 className="text-small tracking-tight text-default-400">@zoeylang</h5>
+          </div>
+        </div>
+        <Button
+          className={isFollowed ? "bg-transparent text-foreground border-default-200" : ""}
+          color="primary"
+          radius="full"
+          size="sm"
+          variant={isFollowed ? "bordered" : "solid"}
+          onPress={() => setIsFollowed(!isFollowed)}
+        >
+          {isFollowed ? "Unfollow" : "Follow"}
+        </Button>
+      </CardHeader>
+      <CardBody className="px-3 py-0 text-small text-default-400">
+        <p>
+          Frontend developer and UI/UX enthusiast. Join me on this coding adventure!
+        </p>
+        <span className="pt-2">
+          #FrontendWithZoey 
+          <span className="py-2" aria-label="computer" role="img">
+            💻
+          </span>
+        </span>
+      </CardBody>
+      <CardFooter className="gap-3">
+        <div className="flex gap-1">
+          <p className="font-semibold text-default-400 text-small">4</p>
+          <p className=" text-default-400 text-small">Following</p>
+        </div>
+        <div className="flex gap-1">
+          <p className="font-semibold text-default-400 text-small">97.1K</p>
+          <p className="text-default-400 text-small">Followers</p>
+        </div>
+      </CardFooter>
+    </Card>
             </div>
         </div>
     )
