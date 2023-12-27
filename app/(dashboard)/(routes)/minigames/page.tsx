@@ -20,7 +20,7 @@ const Sidebar = () => {
         />
         <Empty label="Nothing to see yet :(" />
       </div>
-      <div data-tf-live="01HJNFEQJNA1DXJSWD5EV9FBRA"></div><script src="//embed.typeform.com/next/embed.js"></script>
+      <div data-tf-live="01HJNFEQJNA1DXJSWD5EV9FBRA"></div><script src="//embed.typeform.com/next/embed.js" async />
     </div>
   );
 };
