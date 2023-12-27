@@ -23,6 +23,7 @@ const Sidebar = () => {
         >
           Browser not compatible.
         </iframe>
+      <div></div>
       </div>
       {/* iDev.Games Responsive Embed Code for Catch-Em-All */}
       <div style={{ position: 'relative', height: '0', overflow: 'hidden', paddingBottom: '56.25%' }}>
