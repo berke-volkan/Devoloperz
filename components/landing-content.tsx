@@ -7,7 +7,7 @@ export default function App() {
   const [isFollowed, setIsFollowed] = useState(false);
 
   return (
-    <div style={{ backgroundColor: '#000', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+    <div style={{ backgroundColor: '#111827', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
       <Card style={{ maxWidth: "400px", backgroundColor: '#fff' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem' }}>
           <div style={{ display: 'flex', alignItems: 'center' }}>
