@@ -1,6 +1,7 @@
 import { Heading } from '@/components/heading';
 import { Swords } from 'lucide-react';
 import { Empty } from '@/components/empty';
+import {Spacer} from "@nextui-org/spacer"
 
 const Sidebar = () => {
   return (
@@ -23,7 +24,7 @@ const Sidebar = () => {
         >
           Browser not compatible.
         </iframe>
-      <div></div>
+      <Spacer x={4} />
       </div>
       {/* iDev.Games Responsive Embed Code for Catch-Em-All */}
       <div style={{ position: 'relative', height: '0', overflow: 'hidden', paddingBottom: '56.25%' }}>
