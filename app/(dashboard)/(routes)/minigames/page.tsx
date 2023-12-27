@@ -23,7 +23,7 @@ const Sidebar = () => {
           id="embededGame" 
           src="https://idev.games/embed/sillysnake" 
           scrolling="no" 
-          seamless="seamless" 
+          seamless
           frameBorder="0" 
           style={{ position: 'absolute', top: '0', left: '0', width: '100%', height: '100%' }}
         >
