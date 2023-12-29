@@ -39,7 +39,7 @@ const Sidebar = () => {
         </iframe>
       </div>
       {/* Düzeltme yapılan kısım */}
-      <iframe frameBorder="0" src="https://itch.io/embed-upload/8400802?color=333333" allowFullScreen="" width="640" height="380"><a href="https://mygamelab.itch.io/spaceship">Play SpaceShip on itch.io</a></iframe>
+      <iframe frameBorder="0" src="https://itch.io/embed-upload/8400802?color=333333" width="640" height="380"><a href="https://mygamelab.itch.io/spaceship">Play SpaceShip on itch.io</a></iframe>
       {/* End Embed Code */}
     </div>
   );
