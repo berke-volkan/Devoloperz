@@ -19,12 +19,13 @@ const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 
 const App = () => {
-  const handleSliderChange = (value: number) => {
-    // Firebase veritabanındaki "chatMode" adlı bir alanı güncelle
-    const linkRef = ref(database, 'bakim/chat'); // Doğru referans yolu
-    update(linkRef, { chatMode: value }) // Güncelleme işlemi, "value: value.toString()" yerine "chatMode: value"
-  };
-
+const handleSliderChange = (value: number | number[]) => {
+  // Eğer `value` bir sayı dizisiyse, ilk değeri kullan
+  const sliderValue = Array.isArray(value) ? value[0] : value;
+  // Firebase veritabanındaki "chatMode" adlı bir alanı güncelle
+  const linkRef = ref(database, 'bakim/chat');
+  update(linkRef, { chatMode: sliderValue });
+};
   return (
     <Slider
       label="Chat Mode (0 Açık - 1 Kapalı)"
