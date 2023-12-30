@@ -26,7 +26,7 @@ export default function App() {
   const [value, setValue] = React.useState(0.2);
   const [inputValue, setInputValue] = React.useState("0.2");
 
-  const handleChange = (value) => {
+  const handleChange = (value:any) => {
     if (isNaN(Number(value))) return;
 
     setValue(value);
