@@ -6,6 +6,8 @@ import firebase from "firebase/app";
 import "firebase/database"; // Firebase Realtime Database için gerekli olan modül
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref, onValue, update, Database } from 'firebase/database';
+import {Tooltip} from "@nextui-org/tooltip";
+
 const firebaseConfig = {
     apiKey: "AIzaSyBq0UtNaMQ9W2yrOakjutO47WZjJgH4bUw",
     authDomain: "devoloperz.firebaseapp.com",
