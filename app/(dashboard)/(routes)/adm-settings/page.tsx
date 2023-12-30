@@ -34,7 +34,7 @@ const handleSliderChange = (value: number | number[]) => {
       maxValue={1}
       minValue={0}
       defaultValue={0}
-      className="max-w-md"
+      className="max-w-lg"
       startContent={<PowerIcon className="text-2xl" />}
       endContent={<PowerOffIcon className="text-2xl" />}
       onChange={handleSliderChange} // Slider değeri değiştiğinde çağrılacak fonksiyon
