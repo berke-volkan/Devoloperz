@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { Slider } from "@nextui-org/react";
 import { PowerIcon, PowerOffIcon } from "lucide-react";
