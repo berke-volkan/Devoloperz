@@ -15,7 +15,7 @@ export default function Component() {
             alt="Coding environment"
             className="mx-auto aspect-video overflow-hidden rounded-xl object-cover object-center sm:w-full lg:order-last"
             height="310"
-            src="logo.png"
+            src="empty.png"
             width="550"
           />
           <div className="flex flex-col justify-center space-y-4 text-white">
