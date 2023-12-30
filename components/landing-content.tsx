@@ -1,55 +1,38 @@
 "use client";
 
-import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
+import React, { useState } from "react";
+import { Card, Avatar, Button } from "@nextui-org/react";
 
-const testimonials=[
-    {
-        name:"Devoloperz",
-        title:"Ceo of Devoloperz",
-        description:"I love this plotform very much"
-    },    
-    {
-        name:"Devoloperz",
-        title:"Ceo of Devoloperz",
-        description:"I love this plotform very much"
-    },
-    {
-        name:"Devoloperz",
-        title:"Ceo of Devoloperz",
-        description:"I love this plotform very much"
-    },
-    {
-        name:"Devoloperz",
-        title:"Ceo of Devoloperz",
-        description:"I love this plotform very much"
-    }
-]
+export default function App() {
+  const [isFollowed, setIsFollowed] = useState(false);
 
-export const LandingContent = () => {
-    return(
-        <div className="px-10 pb-20">
-            <h2 className="text-center text-4xl text-white font-extrabold  mb-10">
-                Famous Devolopers using devoloperz
-            </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
-                {testimonials.map((item)=>(
-                    <Card key={item.description} className="bg-[#192339] border-none text-white">
-                        <CardHeader>
-                            <CardTitle className="flex items-center  gap-x-2">
-                                <div>
-                                    <p className="text-lg">{item.name}</p>
-                                    <p className="text-zinc-400 text-sm">{item.title}</p>
-                                </div>
-                            </CardTitle>
-                            <CardContent className="pt-4 px-0">
-                                {item.description}
-                            </CardContent>
-                        </CardHeader>
-                    </Card>
-                ))}
+  return (
+    <div style={{ backgroundColor: '#111827', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <Card style={{ maxWidth: "400px", backgroundColor: '#fff' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <Avatar isBordered src="/logo.png" />
+            <div style={{ marginLeft: '1rem' }}>
+              <p style={{ fontSize: '1rem', fontWeight: 'bold' }}>Zoey Lang</p>
+              <p style={{ color: '#888' }}>@zoeylang</p>
             </div>
+          </div>
+          
         </div>
-    )
+        <div style={{ padding: '1rem' }}>
+          <p style={{ color: '#666' }}>
+            Frontend developer and UI/UX enthusiast. Join me on this coding adventure!
+          </p>
+          <p style={{ color: '#666', marginTop: '1rem' }}>
+            #FrontendWithZoey 💻
+          </p>
+        </div>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem' }}>
+          <p style={{ color: '#888' }}>4 Following</p>
+          <p style={{ color: '#888' }}>97.1K Followers</p>
+        </div>
+      </Card>
+    </div>
+  );
 }
 
-export default LandingContent
