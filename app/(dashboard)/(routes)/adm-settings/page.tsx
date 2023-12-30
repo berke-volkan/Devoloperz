@@ -28,6 +28,7 @@ const handleSliderChange = (value: number | number[]) => {
   update(linkRef, { chatMode: sliderValue });
 };
   return (
+      <div>
     <Slider
       label="Chat Mode (0 Açık - 1 Kapalı)"
       step={1}
@@ -39,6 +40,7 @@ const handleSliderChange = (value: number | number[]) => {
       endContent={<PowerOffIcon className="text-2xl" />}
       onChange={handleSliderChange} // Slider değeri değiştiğinde çağrılacak fonksiyon
     />
+          </div>
   );
 };
 
