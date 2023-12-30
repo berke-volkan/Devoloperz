@@ -19,8 +19,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 
-import React from "react";
-import {Slider} from "@nextui-org/react";
 
 export default function App() {
   const [value, setValue] = React.useState(0.2);
