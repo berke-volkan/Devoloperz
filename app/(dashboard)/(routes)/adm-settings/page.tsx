@@ -14,13 +14,15 @@ const firebaseConfig = {
     appId: "1:851290003802:web:4761f04f7a1b4b63273b63"
   };
   // Firebase'i başlat
+// Firebase'i başlat
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
+
 const App = () => {
-  const handleSliderChange = (value:any) => {
+  const handleSliderChange = (value: number) => {
     // Firebase veritabanındaki "chatMode" adlı bir alanı güncelle
-    const linkRef = ref(database, `bakim/chat`); // Doğru referans yolu
-    update(linkRef, { value: value.toString() }) // Güncelleme işlemi
+    const linkRef = ref(database, 'bakim/chat'); // Doğru referans yolu
+    update(linkRef, { chatMode: value }) // Güncelleme işlemi, "value: value.toString()" yerine "chatMode: value"
   };
 
   return (
