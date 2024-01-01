@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { OpenAI } from "openai";
 
 const openai = new OpenAI({
-    apiKey: "this_is_magic_key",
+    apiKey: "sk-765117771683201035-INLR5939YJ",
     baseURL: "https://api.cortexai.io",
 });
 
