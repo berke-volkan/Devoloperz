@@ -51,20 +51,28 @@ const App: React.FC = () => {
   }, []);
 
   // Function to handle memo submission
-  const handleSubmit = async (event: React.FormEvent) => {
+const handleSubmit = async (event: React.FormEvent) => {
   event.preventDefault();
   try {
-    // Create memo in the database
-    const newMemoRef = push(ref(database, 'memos'));
-    await set(newMemoRef, {
-      writer: user,
+    // Yeni bir memo oluştur
+    const newMemo: Memo = {
+      writer: user?.firstName || "Anonymous", // Kullanıcı adını veya varsayılan bir değeri kullan
       content: content
+    };
+
+    // Firebase'e yeni memo'yu gönder
+    const newMemoRef = push(ref(database, 'memos')); // 'memos' yoluna yeni bir referans oluştur
+    set(newMemoRef, newMemo).then(() => {
+      console.log('Veri başarıyla gönderildi');
+      setContent(''); // Formu temizle
+    }).catch((error) => {
+      console.error('Veri gönderme hatası:', error);
     });
-    setContent('');
   } catch (error) {
-    console.error("Error submitting memo:", error);
+    console.error('Memo gönderme işlemi sırasında bir hata oluştu:', error);
   }
 };
+
 
   return (
     <div className="container mx-auto p-4">
