@@ -201,7 +201,7 @@ const handleSubmit = async (event: React.FormEvent) => {
             </a>
           </div>
         </div>
-        <Line options={options} data={chartData} />
+
       </div>
     )
   ))
@@ -210,6 +210,7 @@ const handleSubmit = async (event: React.FormEvent) => {
 )}
 </div>
 
+              <Line options={options} data={chartData} />
     </div>
   );
 };
