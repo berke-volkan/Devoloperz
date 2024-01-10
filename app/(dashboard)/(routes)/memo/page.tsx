@@ -5,7 +5,7 @@ import { useUser } from '@clerk/clerk-react';
 import { Heading } from '@/components/heading';
 import { Line } from 'react-chartjs-2';
 
-import { getDatabase, ref, onValue, push } from 'firebase/database';
+import { getDatabase, ref, onValue, push,set } from 'firebase/database';
 import { initializeApp } from "firebase/app";
 import { LinkIcon } from 'lucide-react';
 
