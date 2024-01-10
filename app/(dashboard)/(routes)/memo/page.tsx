@@ -52,19 +52,19 @@ const App: React.FC = () => {
 
   // Function to handle memo submission
   const handleSubmit = async (event: React.FormEvent) => {
-    event.preventDefault();
-    try {
-      // Create memo in the database
-      const newMemoRef = push(ref(database, 'memos'));
-      push(newMemoRef, {
-        writer: user,
-        content: content
-      });
-      setContent('');
-    } catch (error) {
-      console.error("Error submitting memo:", error);
-    }
-  };
+  event.preventDefault();
+  try {
+    // Create memo in the database
+    const newMemoRef = push(ref(database, 'memos'));
+    await set(newMemoRef, {
+      writer: user,
+      content: content
+    });
+    setContent('');
+  } catch (error) {
+    console.error("Error submitting memo:", error);
+  }
+};
 
   return (
     <div className="container mx-auto p-4">
