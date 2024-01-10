@@ -56,7 +56,7 @@ const App: React.FC = () => {
     try {
       // Create memo in the database
       const newMemoRef = push(ref(database, 'memos'));
-      set(newMemoRef, {
+      push(newMemoRef, {
         writer: user,
         content: content
       });
