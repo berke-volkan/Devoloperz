@@ -23,6 +23,7 @@ export default function App() {
           <p style={{ color: '#666' }}>
             Devolop your projects faster
           </p>
+         </div>
       </Card>
     </div>
   );
