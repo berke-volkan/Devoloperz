@@ -5,7 +5,11 @@ import { useUser } from '@clerk/clerk-react';
 import { Heading } from '@/components/heading';
 import { Line } from 'react-chartjs-2';
 
+<<<<<<< HEAD
 import { getDatabase, ref, onValue, push } from 'firebase/database';
+=======
+import { getDatabase, ref, onValue, push,set } from 'firebase/database';
+>>>>>>> 11f24e5d48d04cc194dd3c18c2cf3160774b9872
 import { initializeApp } from "firebase/app";
 import { LinkIcon } from 'lucide-react';
 
@@ -51,6 +55,7 @@ const App: React.FC = () => {
   }, []);
 
   // Function to handle memo submission
+<<<<<<< HEAD
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     try {
@@ -65,6 +70,30 @@ const App: React.FC = () => {
       console.error("Error submitting memo:", error);
     }
   };
+=======
+const handleSubmit = async (event: React.FormEvent) => {
+  event.preventDefault();
+  try {
+    // Yeni bir memo oluştur
+    const newMemo: Memo = {
+      writer: user?.firstName || "Anonymous", // Kullanıcı adını veya varsayılan bir değeri kullan
+      content: content
+    };
+
+    // Firebase'e yeni memo'yu gönder
+    const newMemoRef = push(ref(database, 'memos')); // 'memos' yoluna yeni bir referans oluştur
+    set(newMemoRef, newMemo).then(() => {
+      console.log('Veri başarıyla gönderildi');
+      setContent(''); // Formu temizle
+    }).catch((error) => {
+      console.error('Veri gönderme hatası:', error);
+    });
+  } catch (error) {
+    console.error('Memo gönderme işlemi sırasında bir hata oluştu:', error);
+  }
+};
+
+>>>>>>> 11f24e5d48d04cc194dd3c18c2cf3160774b9872
 
   return (
     <div className="container mx-auto p-4">
@@ -114,4 +143,8 @@ const App: React.FC = () => {
   );
 };
 
+<<<<<<< HEAD
 export default App;
+=======
+export default App;
+>>>>>>> 11f24e5d48d04cc194dd3c18c2cf3160774b9872

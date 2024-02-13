@@ -173,35 +173,44 @@ const handleSubmit = async (event: React.FormEvent) => {
       </form>
      {/* Display the list of short links */}
 <div className="max-h-96 overflow-y-auto bg-white p-4 rounded-lg shadow-md mb-4 mt-4">
-  {shortLinks.length > 0 ? (
-    shortLinks.map((link, index) => (
+{shortLinks.length > 0 ? (
+  shortLinks.map((link, index) => (
+    link.id === user?.id && (
       <div key={index} className="mb-4 p-4 border-b last:border-b-0">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center">
           <div className="mb-2 md:mb-0">
             <span className="font-semibold text-gray-700">Short Link:</span>{' '}
-            <a href={link.shortLink} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:text-blue-600 transition-colors">
+            <a
+              href={link.shortLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-500 hover:text-blue-600 transition-colors"
+            >
               {link.shortLink}
             </a>
           </div>
           <div>
             <span className="font-semibold text-gray-700">Original URL:</span>{' '}
-            <a href={link.originalUrl} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:text-blue-600 transition-colors truncate">
+            <a
+              href={link.originalUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-500 hover:text-blue-600 transition-colors truncate"
+            >
               {link.originalUrl}
             </a>
           </div>
         </div>
-        
-      </div>
-    ))
-  ) : (
-    <p className="text-center text-gray-500">No short links created yet.</p>
-  )}
-</div>
-   {shortLinks.length > 0 && (
-     <Line options={options} data={chartData} />
-   )}
-   
 
+      </div>
+    )
+  ))
+) : (
+  <div>No short links available.</div>
+)}
+</div>
+
+              <Line options={options} data={chartData} />
     </div>
   );
 };
