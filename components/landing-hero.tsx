@@ -25,7 +25,7 @@ export const LandingHero = () => {
                 Meet with peoples like you!
             </div>
             <div>
-                <Link href={isSignedIn ? "/dashboard":"/sign-up"}>
+                <Link href={isSignedIn ? "/dashboard":"/sign-in"}>
                     <Button variant="destructive" className="md:tex-lg  p-4 md:p-6 rounded-full font-semibold">Lets Devolop!</Button>
                 </Link>
             </div>

@@ -11,6 +11,7 @@ import {
   InfoIcon,
   LayoutDashboard,
   LinkIcon,
+  MemoryStickIcon,
   MessageSquare,
   MusicIcon,
   Settings,
@@ -73,6 +74,12 @@ const routes = [
     icon: LinkIcon,
     href: "/l",
     color: "text-violet-700",
+  },
+  {
+    label:"Memo",
+    icon:MemoryStickIcon,
+    href:"/memo",
+    color:"text-red-700",
   },
   {
     label: "Rooms",

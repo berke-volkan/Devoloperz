@@ -38,7 +38,7 @@ export const LandingNavBar = () => {
                     </Button>
                 </Link>
                 <Link href="/blog">
-                    <Button variant={"outline"} className="rounded-full">
+                    <Button variant={"outline"} className="rounded-full ">
                         Our blog
                     </Button>
                 </Link>

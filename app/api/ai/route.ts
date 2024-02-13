@@ -1,8 +1,10 @@
 import { NextResponse } from "next/server";
 import { OpenAI } from "openai";
+import { GoogleGenerativeAI } from "@google/generative-ai";
+const genAI=new GoogleGenerativeAI("AIzaSyD4eoc6VLKzxvmOUcc1m9YvA4wdqqDeIFY");
 
 const openai = new OpenAI({
-    apiKey: "this_is_magic_key",
+    apiKey: "sk-765117771683201035-INLR5939YJ",
     baseURL: "https://api.cortexai.io",
 });
 
@@ -10,17 +12,13 @@ export async function POST(req: Request) {
     try {
         // Parse JSON body directly in the destructuring assignment
         const { messages } = await req.json();
-
-        const response = await openai.chat.completions.create({
-            model: "gpt-4-1106-preview",
-            messages: [
-                { role: "user", content: messages },
-            ],
-            temperature: 0,
-        });
+        const model = genAI.getGenerativeModel({ model: "gemini-pro"});
+        const result = await model.generateContent(messages);
+        const response = await result.response;
+        const text = response.text();
 
         // Return the content directly from the response
-        return NextResponse.json(response.choices[0].message.content);
+        return NextResponse.json(text);
         
     } catch (error) {
         console.error("[api_err]", error);
