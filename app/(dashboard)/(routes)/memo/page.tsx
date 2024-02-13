@@ -5,11 +5,7 @@ import { useUser } from '@clerk/clerk-react';
 import { Heading } from '@/components/heading';
 import { Line } from 'react-chartjs-2';
 
-<<<<<<< HEAD
-import { getDatabase, ref, onValue, push } from 'firebase/database';
-=======
 import { getDatabase, ref, onValue, push,set } from 'firebase/database';
->>>>>>> 11f24e5d48d04cc194dd3c18c2cf3160774b9872
 import { initializeApp } from "firebase/app";
 import { LinkIcon } from 'lucide-react';
 
@@ -55,22 +51,6 @@ const App: React.FC = () => {
   }, []);
 
   // Function to handle memo submission
-<<<<<<< HEAD
-  const handleSubmit = async (event: React.FormEvent) => {
-    event.preventDefault();
-    try {
-      // Create memo in the database
-      const newMemoRef = push(ref(database, 'memos'));
-      set(newMemoRef, {
-        writer: user,
-        content: content
-      });
-      setContent('');
-    } catch (error) {
-      console.error("Error submitting memo:", error);
-    }
-  };
-=======
 const handleSubmit = async (event: React.FormEvent) => {
   event.preventDefault();
   try {
@@ -93,7 +73,6 @@ const handleSubmit = async (event: React.FormEvent) => {
   }
 };
 
->>>>>>> 11f24e5d48d04cc194dd3c18c2cf3160774b9872
 
   return (
     <div className="container mx-auto p-4">
@@ -143,8 +122,4 @@ const handleSubmit = async (event: React.FormEvent) => {
   );
 };
 
-<<<<<<< HEAD
 export default App;
-=======
-export default App;
->>>>>>> 11f24e5d48d04cc194dd3c18c2cf3160774b9872
