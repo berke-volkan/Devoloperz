@@ -8,8 +8,10 @@ import * as y from 'yjs';
 import { WebrtcProvider } from 'y-webrtc';
 import { MonacoBinding } from 'y-monaco';
 import * as monaco from 'monaco-editor';
+import Empty from '@/components/empty';
 
 const RoomChangeForm: React.FC<{ onRoomChange: (roomId: string) => void }> = ({ onRoomChange }) => {
+  const { user } = useUser();
   const [newRoom, setNewRoom] = useState('');
 
   const handleSubmitRoomChange = () => {
@@ -17,18 +19,21 @@ const RoomChangeForm: React.FC<{ onRoomChange: (roomId: string) => void }> = ({ 
   };
 
   return (
-    <div className="flex items-center space-x-4 mt-4">
-      <input
-        type="text"
-        placeholder="Type your new room id"
-        value={newRoom}
-        onChange={(e) => setNewRoom(e.target.value)}
-        className="p-2 border border-gray-300 rounded-lg"
-      />
-      <button onClick={handleSubmitRoomChange} className="p-2 bg-blue-500 text-white rounded-lg">
-        Change Room
-      </button>
-    </div>
+    <>
+      {user?.lastName=="admin" &&
+        <div className="flex items-center space-x-4 mt-4">
+            <input
+            type="text"
+            placeholder="Type your new room id"
+            value={newRoom}
+            onChange={(e) => setNewRoom(e.target.value)}
+            className="p-2 border border-gray-300 rounded-lg"
+          />
+        </div>
+          
+      }
+      </>
+
   );
 };
 
@@ -122,8 +127,11 @@ const App: React.FC = () => {
         iconColor="text-orange-700"
         bgColor="bg-orange-700/10"
       />
+      <Empty label='This system is in beta. Please try again later or request acces for beta access' />
       <div className="flex items-center space-x-4">
-        <input
+        {user?.lastName=="admin" &&
+        <>
+                <input
           type="text"
           placeholder="Type your room id"
           value={newMessage}
@@ -133,6 +141,9 @@ const App: React.FC = () => {
         <button onClick={handleSubmitRoomChange} className="p-2 bg-blue-500 text-white rounded-lg">
           Change Room
         </button>
+        </>
+        }
+
       </div>
       {roomIdentifier && (
         <div>

@@ -99,23 +99,23 @@ const handleSubmit = async (event: React.FormEvent) => {
 
       {/* Display the list of memos */}
       <div className="max-h-96 overflow-y-auto bg-white p-4 rounded-lg shadow-md mb-4 mt-4">
-        {memos.length > 0 ? (
-          memos.map((memo, index) => (
-            <div key={index} className="mb-4 p-4 border-b last:border-b-0">
-              <div className="flex flex-col md:flex-row justify-between items-start md:items-center">
-                <div className="mb-2 md:mb-0">
-                  <span className="font-semibold text-gray-700">Writer:</span>{' '}
-                  {memo.writer}
-                </div>
-                <div>
-                  <span className="font-semibold text-gray-700">Content:</span>{' '}
-                  {memo.content}
+        {memos.length > 0 && (
+          memos
+            .filter((memo) => memo.writer === user?.firstName)
+            .map((memo, index) => (
+              <div key={index} className="mb-4 p-4 border-b last:border-b-0">
+                <div className="flex flex-col md:flex-row justify-between items-start md:items-center">
+                  <div className="mb-2 md:mb-0">
+                    <span className="font-semibold text-gray-700">Writer:</span>{' '}
+                    {memo.writer}
+                  </div>
+                  <div>
+                    <span className="font-semibold text-gray-700">Content:</span>{' '}
+                    {memo.content}
+                  </div>
                 </div>
               </div>
-            </div>
-          ))
-        ) : (
-          <div>No memos available.</div>
+            ))
         )}
       </div>
     </div>

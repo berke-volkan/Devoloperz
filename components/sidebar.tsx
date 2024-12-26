@@ -152,7 +152,7 @@ const Sidebar = () => {
           ))}
           {String(user.user?.id) === "user_2YiyVcOKsa4Jb8D8DNP2ZvZeo6A" && (
             <h1>
-              Bilgi: Şuanda test kullanisindasiniz. Bu kullanici test bitince silinecek
+              Info: This account is for testing purposes only. Please do not use it for any other purposes.
             </h1>
           )}
         </div>

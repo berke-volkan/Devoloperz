@@ -1,80 +1,194 @@
 "use client";
 
-import Link from "next/link";
-import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
-
 const testimonials=[
-    {
-        name:"Post title",
-        title:"Writer of the post",
-        description:"Short desc.",
-        href:"/view",
-    },    {
-        name:"Post title",
-        title:"Writer of the post",
-        description:"Short desc.",
-        href:"/view",
-    },    {
-        name:"Post title",
-        title:"Writer of the post",
-        description:"Short desc.",
-        href:"/view",
-    },    {
-        name:"Post title",
-        title:"Writer of the post",
-        description:"Short desc.",
-        href:"/view",
-    },    {
-        name:"Post title",
-        title:"Writer of the post",
-        description:"Short desc.",
-        href:"/view",
-    },    {
-        name:"Post title",
-        title:"Writer of the post",
-        description:"Short desc.",
-        href:"/view",
-    },    {
-        name:"Post title",
-        title:"Writer of the post",
-        description:"Short desc.",
-        href:"/view",
-    },
-    {
-        name:"Post title",
-        title:"Writer of the post",
-        description:"Short desc.",
-        href:"/view",
-    },
-]
+        {
+            name:"Post title",
+            title:"Writer of the post",
+            description:"Short desc.",
+            href:"/view",
+        },    {
+            name:"Post title",
+            title:"Writer of the post",
+            description:"Short desc.",
+            href:"/view",
+        },    {
+            name:"Post title",
+            title:"Writer of the post",
+            description:"Short desc.",
+            href:"/view",
+        },    {
+            name:"Post title",
+            title:"Writer of the post",
+            description:"Short desc.",
+            href:"/view",
+        },    {
+            name:"Post title",
+            title:"Writer of the post",
+            description:"Short desc.",
+            href:"/view",
+        },    {
+            name:"Post title",
+            title:"Writer of the post",
+            description:"Short desc.",
+            href:"/view",
+        },    {
+            name:"Post title",
+            title:"Writer of the post",
+            description:"Short desc.",
+            href:"/view",
+        },
+        {
+            name:"Post title",
+            title:"Writer of the post",
+            description:"Short desc.",
+            href:"/view",
+        },
+    ]
 
-export const BlogView = () => {
+
+import React, { useState, useEffect } from 'react';
+import { useUser } from '@clerk/clerk-react';
+import { Heading } from '@/components/heading';
+import { Shield, BadgeCheckIcon, MessageSquare, CheckCircleIcon } from 'lucide-react';
+import { getDatabase, ref, onValue, push } from 'firebase/database';
+import { initializeApp } from "firebase/app";
+import { cn } from '@/lib/utils';
+import { User as NextUser } from '@nextui-org/user';
+import {Badge} from "@nextui-org/badge"
+import {Spacer} from "@nextui-org/spacer"
+import { Card, CardContent, CardDescription } from '@/components/ui/card';
+import {Popover, PopoverTrigger, PopoverContent} from "@nextui-org/popover";
+import Image from 'next/image';
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBq0UtNaMQ9W2yrOakjutO47WZjJgH4bUw",
+  authDomain: "devoloperz.firebaseapp.com",
+  projectId: "devoloperz",
+  storageBucket: "devoloperz.appspot.com",
+  messagingSenderId: "851290003802",
+  appId: "1:851290003802:web:4761f04f7a1b4b63273b63"
+};
+// Firebase'i başlat
+const app = initializeApp(firebaseConfig);
+const database = getDatabase(app);
+
+
+interface Message {
+  text: string;
+  timestamp: string;
+  username: string;
+  lastname: string;
+  desc: string,
+  title: string,
+  id: string;
+  img:string;
+} 
+
+const App = () => {
+  const [blogtext,Setblogtext] = useState<Message[]>([]);
+  const [newblog, setNewblog] = useState('');
+  const { user } = useUser();
+  const [shortdesc, setShortdesc] = useState('');
+  const [title, setTitle] = useState('');
+  const [post, setPost] = useState('');
+  const [link, setlink] = useState('');
+  const RenderMessage: React.FC<{ message: Message }> = ({ message }) => {
     return(
-        <div className="px-10 pb-20">
-            <h2 className="text-center text-4xl text-white font-extrabold  mb-10">
-                Our blog posts 
-            </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
-                {testimonials.map((item)=>(
-                    <Link href={item.href} key={item.description}>
-                      <Card key={item.description} className="bg-[#192339] border-none text-white" >
-                        <CardHeader>
-                            <CardTitle className="flex items-center  gap-x-2">
-                                <div>
-                                    <p className="text-lg">{item.name}</p>
-                                    <p className="text-zinc-400 text-sm">{item.title}</p>
-                                </div>
-                            </CardTitle>
-                            <CardContent className="pt-4 px-0">
-                                {item.description}
-                            </CardContent>
-                        </CardHeader>
-                      </Card>
-                    </Link>
-                ))}
-            </div>
-        </div>
+      <div>
+          <h1 className='font-bold uppercase' style={{textAlign:"center",paddingBottom:"2px"}}>{message.title} </h1>
+          <img src={message.img}/>
+          <h1  style={{textAlign:"center",fontStyle:"italic",paddingTop:"10px"}}>{message.desc}</h1>
+          <h1 style={{textAlign:"left",paddingTop:"2px"}}>{message.title}</h1>
+          </div>
     )
-}
+  };
+  const handleSendMessage = () => {
+    if (post.trim() === '' || !user) {
+      return;
+    }
 
-export default BlogView
+    const blog = {
+      text: post,
+      timestamp: new Date().toISOString(),
+      username: user.firstName?.substring(0, 5) ?? "Devoloperz Team",
+      lastname: user.lastName ?? "",
+      desc: shortdesc,
+      title: title,
+      img: link,
+    };
+
+    const blogsRef = ref(database, 'blogs');
+    push(blogsRef, blog);
+    console.log(blog);
+
+    setPost('');
+  };
+
+  useEffect(() => {
+    const blogRef = ref(database, 'blogs');
+    const unsubscribe = onValue(blogRef, (snapshot) => {
+      const data = snapshot.val();
+      const formattedData = data
+        ? Object.keys(data).map((id) => ({ id, ...data[id] }))
+        : [];
+        Setblogtext(formattedData);
+        console.log(blogtext);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  return (
+    <>
+    {user?.lastName=="admin" &&  <div className="flex items-center space-x-4">
+        <input
+          type="text"
+          placeholder="Enter name of the post"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          className="p-2 border border-gray-300 rounded-lg w-full"
+        />
+         <input
+          type="text"
+          placeholder="Enter short description"
+          value={shortdesc}
+          onChange={(e) => setShortdesc(e.target.value)}
+          className="p-2 border border-gray-300 rounded-lg w-full"
+        />
+        <input
+          type="text"
+          placeholder="Enter post"
+          value={post}
+          onChange={(e) => setPost(e.target.value)}
+          className="p-2 border border-gray-300 rounded-lg w-full"
+        />
+        <input
+          type="text"
+          placeholder="Enterimage link"
+          value={link}
+          onChange={(e) => setlink(e.target.value)}
+          className="p-2 border border-gray-300 rounded-lg w-full"
+        />
+        <button onClick={handleSendMessage} className="p-2 bg-blue-500 text-white rounded-lg">
+          Send
+        </button>
+      </div>}
+   
+      <div className="container mx-auto p-4" style={{display:"inline-block"}}>
+        {blogtext.map((blog) => (
+          <div 
+            key={blog.id}
+            className="p-10   item-start gap-x-10 mt-4 rounded-lg bg-white "
+            style={{display:"inline-block",marginLeft:"25px",width:"500px"}}
+          >
+        
+            <RenderMessage message={blog} />
+          </div>
+        ))}
+      </div>
+      
+    </>
+  );
+};
+
+export default App
