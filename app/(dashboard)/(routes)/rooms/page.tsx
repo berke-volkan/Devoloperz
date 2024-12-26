@@ -1,4 +1,5 @@
 "use client";
+/*
 import React, { useState, useRef, useEffect } from 'react';
 import { useUser } from '@clerk/clerk-react';
 import { Heading } from '@/components/heading';
@@ -106,9 +107,6 @@ const App: React.FC = () => {
   };
 
 useEffect(() => {
-  if (typeof window !== 'undefined') {
-    console.log(window.location.href);
-  }
 
   return () => {
     if (providerRef.current) {
@@ -166,3 +164,21 @@ const AuthenticatedApp: React.FC = () => (
 
 export default AuthenticatedApp;
 
+*/
+import Empty from "@/components/empty";
+import { Heading } from "@/components/heading";
+import { CodeIcon } from "lucide-react";
+export default function Page() {
+  return(
+    <div className="container mx-auto p-4">
+    <Heading
+      title="Rooms"
+      description="Enter your room id and join the room"
+      icon={CodeIcon}
+      iconColor="text-orange-700"
+      bgColor="bg-orange-700/10"
+    />
+    <Empty label='This system is in beta. Please try again later or request acces for beta access' />
+  </div>
+  )
+}
