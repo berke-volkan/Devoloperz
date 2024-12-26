@@ -105,20 +105,23 @@ const App: React.FC = () => {
     handleRoomChange(newMessage);
   };
 
-  useEffect(() => {
-    return () => {
-      // Cleanup when the component unmounts
-      if (providerRef.current) {
-        providerRef.current.destroy();
-        providerRef.current = null;
-      }
+useEffect(() => {
+  if (typeof window !== 'undefined') {
+    console.log(window.location.href);
+  }
 
-      if (bindingRef.current) {
-        bindingRef.current.destroy();
-        bindingRef.current = null;
-      }
-    };
-  }, []);
+  return () => {
+    if (providerRef.current) {
+      providerRef.current.destroy();
+      providerRef.current = null;
+    }
+
+    if (bindingRef.current) {
+      bindingRef.current.destroy();
+      bindingRef.current = null;
+    }
+  };
+}, []);
 
   return (
     <div className="container mx-auto p-4">
