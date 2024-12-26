@@ -11,18 +11,8 @@ import {Badge} from "@nextui-org/badge"
 import {Spacer} from "@nextui-org/spacer"
 import { Card, CardContent, CardDescription } from '@/components/ui/card';
 import {Popover, PopoverTrigger, PopoverContent} from "@nextui-org/popover";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyBq0UtNaMQ9W2yrOakjutO47WZjJgH4bUw",
-  authDomain: "devoloperz.firebaseapp.com",
-  projectId: "devoloperz",
-  storageBucket: "devoloperz.appspot.com",
-  messagingSenderId: "851290003802",
-  appId: "1:851290003802:web:4761f04f7a1b4b63273b63"
-};
+import  database from '@/app/firebase';
 // Firebase'i başlat
-const app = initializeApp(firebaseConfig);
-const database = getDatabase(app);
 const RenderMessage: React.FC<{ message: Message }> = ({ message }) => {
   if (message.lastname === "Admin") {
     return (

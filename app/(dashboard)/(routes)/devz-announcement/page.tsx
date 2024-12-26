@@ -5,7 +5,7 @@ import { Heading } from '@/components/heading';
 import { BadgeCheck, BadgeCheckIcon, BadgeInfo, BadgeInfoIcon, CodeIcon, InfoIcon, MessageSquare, Shield } from 'lucide-react';
 import {  ref, onValue, push } from 'firebase/database';
 import { cn } from '@/lib/utils';
-import {database} from '@/app/firebase';
+import database from '@/app/firebase';
 interface Message {
   id: string;
   text: string;

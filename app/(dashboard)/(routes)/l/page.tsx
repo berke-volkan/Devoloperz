@@ -16,7 +16,7 @@ import {
 } from 'chart.js';
 import {  ref, onValue, push } from 'firebase/database';
 import { LinkIcon } from 'lucide-react';
-import {database} from '@/app/firebase';
+import database from '@/app/firebase';
 
 // ChartJS register components
 ChartJS.register(

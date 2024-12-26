@@ -7,7 +7,7 @@ import { Line } from 'react-chartjs-2';
 
 import { ref, onValue, push,set } from 'firebase/database';
 import { LinkIcon } from 'lucide-react';
-import {database} from '@/app/firebase';
+import database from '@/app/firebase';
 
 interface Memo {
   writer: string;
