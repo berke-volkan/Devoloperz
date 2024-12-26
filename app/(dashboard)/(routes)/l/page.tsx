@@ -14,9 +14,9 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
-import { getDatabase, ref, onValue, push } from 'firebase/database';
-import { initializeApp } from "firebase/app";
+import {  ref, onValue, push } from 'firebase/database';
 import { LinkIcon } from 'lucide-react';
+import {database} from '@/app/firebase';
 
 // ChartJS register components
 ChartJS.register(
@@ -43,19 +43,8 @@ ChartJS.register(
   },
 };
 
-// Firebase configuration and initialization
-const firebaseConfig = {
-  apiKey: "AIzaSyBq0UtNaMQ9W2yrOakjutO47WZjJgH4bUw",
-  authDomain: "devoloperz.firebaseapp.com",
-  databaseURL: "https://devoloperz-default-rtdb.firebaseio.com",
-  projectId: "devoloperz",
-  storageBucket: "devoloperz.appspot.com",
-  messagingSenderId: "851290003802",
-  appId: "1:851290003802:web:72fc84a7a02e0371273b63"
-};
 
-const app = initializeApp(firebaseConfig);
-const database = getDatabase(app);
+
 
 interface Link {
   shortLink: string;

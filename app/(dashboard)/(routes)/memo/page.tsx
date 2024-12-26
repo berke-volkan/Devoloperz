@@ -5,26 +5,9 @@ import { useUser } from '@clerk/clerk-react';
 import { Heading } from '@/components/heading';
 import { Line } from 'react-chartjs-2';
 
-import { getDatabase, ref, onValue, push,set } from 'firebase/database';
-import { initializeApp } from "firebase/app";
+import { ref, onValue, push,set } from 'firebase/database';
 import { LinkIcon } from 'lucide-react';
-
-
-
-
-// Firebase configuration and initialization
-const firebaseConfig = {
-  apiKey: "AIzaSyBq0UtNaMQ9W2yrOakjutO47WZjJgH4bUw",
-  authDomain: "devoloperz.firebaseapp.com",
-  databaseURL: "https://devoloperz-default-rtdb.firebaseio.com",
-  projectId: "devoloperz",
-  storageBucket: "devoloperz.appspot.com",
-  messagingSenderId: "851290003802",
-  appId: "1:851290003802:web:72fc84a7a02e0371273b63"
-};
-
-const app = initializeApp(firebaseConfig);
-const database = getDatabase(app);
+import {database} from '@/app/firebase';
 
 interface Memo {
   writer: string;

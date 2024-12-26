@@ -3,23 +3,9 @@ import React, { useState, useEffect } from 'react';
 import { useUser } from '@clerk/clerk-react';
 import { Heading } from '@/components/heading';
 import { BadgeCheck, BadgeCheckIcon, BadgeInfo, BadgeInfoIcon, CodeIcon, InfoIcon, MessageSquare, Shield } from 'lucide-react';
-import { getDatabase, ref, onValue, push } from 'firebase/database';
-import { initializeApp } from "firebase/app";
-import { UserAvatar } from '@/components/user-avatar';
+import {  ref, onValue, push } from 'firebase/database';
 import { cn } from '@/lib/utils';
-
-const firebaseConfig = {
-  apiKey: "AIzaSyBq0UtNaMQ9W2yrOakjutO47WZjJgH4bUw",
-  authDomain: "devoloperz.firebaseapp.com",
-  projectId: "devoloperz",
-  storageBucket: "devoloperz.appspot.com",
-  messagingSenderId: "851290003802",
-  appId: "1:851290003802:web:4761f04f7a1b4b63273b63"
-};
-// Initialize Firebase
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const database = getDatabase(app);  // Get the database reference
+import {database} from '@/app/firebase';
 interface Message {
   id: string;
   text: string;

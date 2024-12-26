@@ -1,56 +1,11 @@
 "use client";
 
-const testimonials=[
-        {
-            name:"Post title",
-            title:"Writer of the post",
-            description:"Short desc.",
-            href:"/view",
-        },    {
-            name:"Post title",
-            title:"Writer of the post",
-            description:"Short desc.",
-            href:"/view",
-        },    {
-            name:"Post title",
-            title:"Writer of the post",
-            description:"Short desc.",
-            href:"/view",
-        },    {
-            name:"Post title",
-            title:"Writer of the post",
-            description:"Short desc.",
-            href:"/view",
-        },    {
-            name:"Post title",
-            title:"Writer of the post",
-            description:"Short desc.",
-            href:"/view",
-        },    {
-            name:"Post title",
-            title:"Writer of the post",
-            description:"Short desc.",
-            href:"/view",
-        },    {
-            name:"Post title",
-            title:"Writer of the post",
-            description:"Short desc.",
-            href:"/view",
-        },
-        {
-            name:"Post title",
-            title:"Writer of the post",
-            description:"Short desc.",
-            href:"/view",
-        },
-    ]
-
 
 import React, { useState, useEffect } from 'react';
 import { useUser } from '@clerk/clerk-react';
 import { Heading } from '@/components/heading';
 import { Shield, BadgeCheckIcon, MessageSquare, CheckCircleIcon } from 'lucide-react';
-import { getDatabase, ref, onValue, push } from 'firebase/database';
+import { ref, onValue, push } from 'firebase/database';
 import { initializeApp } from "firebase/app";
 import { cn } from '@/lib/utils';
 import { User as NextUser } from '@nextui-org/user';
@@ -59,18 +14,7 @@ import {Spacer} from "@nextui-org/spacer"
 import { Card, CardContent, CardDescription } from '@/components/ui/card';
 import {Popover, PopoverTrigger, PopoverContent} from "@nextui-org/popover";
 import Image from 'next/image';
-
-const firebaseConfig = {
-  apiKey: "AIzaSyBq0UtNaMQ9W2yrOakjutO47WZjJgH4bUw",
-  authDomain: "devoloperz.firebaseapp.com",
-  projectId: "devoloperz",
-  storageBucket: "devoloperz.appspot.com",
-  messagingSenderId: "851290003802",
-  appId: "1:851290003802:web:4761f04f7a1b4b63273b63"
-};
-// Firebase'i başlat
-const app = initializeApp(firebaseConfig);
-const database = getDatabase(app);
+import {database} from '@/app/firebase';
 
 
 interface Message {
