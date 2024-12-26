@@ -42,7 +42,8 @@ const App = () => {
       <h1 className='font-bold uppercase' style={{textAlign:"center",paddingBottom:"2px"}}>{message.title}</h1>
       <Image src={message.img} alt={message.title} width={500} height={300} />
       <h1 style={{textAlign:"center",fontStyle:"italic",paddingTop:"10px"}}>{message.desc}</h1>
-      <h1 style={{textAlign:"left",paddingTop:"2px"}}>{message.title}</h1>
+      <h1 style={{textAlign:"left",paddingTop:"2px"}}>{message.text}</h1>
+      <h6 style={{textAlign:"right",paddingTop:"2px"}}>Writen By: {message.username}</h6>
     </div>
     )
   };
@@ -54,7 +55,7 @@ const App = () => {
     const blog = {
       text: post,
       timestamp: new Date().toISOString(),
-      username: user.firstName?.substring(0, 5) ?? "Devoloperz Team",
+      username: user.firstName,
       lastname: user.lastName ?? "",
       desc: shortdesc,
       title: title,
@@ -83,7 +84,7 @@ const App = () => {
 
   return (
     <>
-    {user?.lastName=="admin" &&  <div className="flex items-center space-x-4">
+    {user?.lastName=="Admin" &&  <div className="flex items-center space-x-4">
         <input
           type="text"
           placeholder="Enter name of the post"
