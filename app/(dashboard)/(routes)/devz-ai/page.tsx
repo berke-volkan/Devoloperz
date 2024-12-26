@@ -148,12 +148,11 @@ const ConversationPage = () => {
           alt="nextui logo"
           height={90}
           radius="sm"
-          src="https://th.bing.com/th?id=OIP.5Fh8xHKNuGyOEQgBGy0OBAHaFc&w=291&h=214&c=8&rs=1&qlt=90&o=6&dpr=1.3&pid=3.1&rm=2"
+          src="https://freepnglogo.com/images/all_img/1728457808_Google_Gemini_logo_PNG.png"
           width={90}
         />
         <div className="flex flex-col">
-          <p className="text-md">GPT - Vision</p>
-          <p className="text-small text-default-500">Thanks to our partner Cortex</p>
+          <p className="text-md">Gemini Pro</p>
         </div>
       </CardHeader>
       <Divider/>
@@ -161,15 +160,6 @@ const ConversationPage = () => {
       <p>This answer is ai-generated and may contain errors.Please check the important answers</p>
       </CardBody>
       <Divider/>
-      <CardFooter>
-        <Link
-          isExternal
-          showAnchorIcon
-          href="https://cortex.fun/premium"
-        >
-          Check our partner!
-        </Link>
-      </CardFooter>
     </Card>
 
         </PopoverContent>
