@@ -3,7 +3,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useUser } from '@clerk/clerk-react';
 import { Heading } from '@/components/heading';
 import { CodeIcon } from 'lucide-react';
-import { Editor, OnMount } from "@monaco-editor/react";
+import {  OnMount } from "@monaco-editor/react";
 import * as y from 'yjs';
 import { WebrtcProvider } from 'y-webrtc';
 import { MonacoBinding } from 'y-monaco';
