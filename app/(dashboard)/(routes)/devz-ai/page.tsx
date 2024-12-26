@@ -158,10 +158,7 @@ const ConversationPage = () => {
       </CardHeader>
       <Divider/>
       <CardBody>
-        <p>We use Cortex based GPT4 - Vision ai.This is most expensive ai :)</p>
-        <Spacer x={4}/>
-        <p>GPT-4 with Vision, sometimes referred to as GPT-4V or gpt-4-vision-preview in the API, allows the model to take in images and answer questions about them. Historically, language model systems have been limited by taking in a single input modality, text. For many use cases, this constrained the areas where models like GPT-4 could be used.</p>
-        <p>İf you want cheap gpt-4 contact staffs!</p>
+        <p>This answer is ai-generated and may contain errors.Please check the important answers</p>
       </CardBody>
       <Divider/>
       <CardFooter>
