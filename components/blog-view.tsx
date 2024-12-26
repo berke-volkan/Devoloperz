@@ -14,7 +14,7 @@ import {Spacer} from "@nextui-org/spacer"
 import { Card, CardContent, CardDescription } from '@/components/ui/card';
 import {Popover, PopoverTrigger, PopoverContent} from "@nextui-org/popover";
 import Image from 'next/image';
-import {database} from '@/app/firebase';
+import database from '@/app/firebase';
 
 
 interface Message {
