@@ -9,6 +9,8 @@ import { WebrtcProvider } from 'y-webrtc';
 import { MonacoBinding } from 'y-monaco';
 import * as monaco from 'monaco-editor';
 import Empty from '@/components/empty';
+import dynamic from 'next/dynamic';
+const Editor = dynamic(() => import('@monaco-editor/react'), { ssr: false });
 
 const RoomChangeForm: React.FC<{ onRoomChange: (roomId: string) => void }> = ({ onRoomChange }) => {
   const { user } = useUser();

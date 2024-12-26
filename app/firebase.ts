@@ -1,6 +1,6 @@
-import firebase from 'firebase/app';
-
+import { initializeApp } from 'firebase/app';
 import { getDatabase } from 'firebase/database';
+
 const firebaseConfig = {
   apiKey: process.env.apikey,
   authDomain: process.env.authDomain,
@@ -10,8 +10,6 @@ const firebaseConfig = {
   appId: process.env.appId,
 };
 
-firebase.initializeApp(firebaseConfig);
-
-const app=firebase.initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 export default database;

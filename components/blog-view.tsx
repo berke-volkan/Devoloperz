@@ -38,12 +38,12 @@ const App = () => {
   const [link, setlink] = useState('');
   const RenderMessage: React.FC<{ message: Message }> = ({ message }) => {
     return(
-      <div>
-          <h1 className='font-bold uppercase' style={{textAlign:"center",paddingBottom:"2px"}}>{message.title} </h1>
-          <img src={message.img}/>
-          <h1  style={{textAlign:"center",fontStyle:"italic",paddingTop:"10px"}}>{message.desc}</h1>
-          <h1 style={{textAlign:"left",paddingTop:"2px"}}>{message.title}</h1>
-          </div>
+<div>
+      <h1 className='font-bold uppercase' style={{textAlign:"center",paddingBottom:"2px"}}>{message.title}</h1>
+      <Image src={message.img} alt={message.title} width={500} height={300} />
+      <h1 style={{textAlign:"center",fontStyle:"italic",paddingTop:"10px"}}>{message.desc}</h1>
+      <h1 style={{textAlign:"left",paddingTop:"2px"}}>{message.title}</h1>
+    </div>
     )
   };
   const handleSendMessage = () => {
@@ -75,12 +75,11 @@ const App = () => {
       const formattedData = data
         ? Object.keys(data).map((id) => ({ id, ...data[id] }))
         : [];
-        Setblogtext(formattedData);
-        console.log(blogtext);
+      Setblogtext(formattedData);
     });
-
+  
     return () => unsubscribe();
-  }, []);
+  }, [blogtext]); // Add blogtext as a dependency
 
   return (
     <>
