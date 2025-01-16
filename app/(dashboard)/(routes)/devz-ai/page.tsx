@@ -61,7 +61,7 @@ const ConversationPage = () => {
         
         <Heading
           title="Devz-Ai"
-          description="Create your apps faster with AI! Powered by Cortex"
+          description="Create your apps faster with AI! "
           icon={AtomIcon}
           iconColor="text-yellow-700"
           bgColor="bg-yellow-700/10"

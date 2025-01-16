@@ -6,12 +6,14 @@ import { initializeApp } from "firebase/app";
 import { Bar } from 'react-chartjs-2';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBq0UtNaMQ9W2yrOakjutO47WZjJgH4bUw",
-  authDomain: "devoloperz.firebaseapp.com",
-  projectId: "devoloperz",
-  storageBucket: "devoloperz.appspot.com",
-  messagingSenderId: "851290003802",
-  appId: "1:851290003802:web:4761f04f7a1b4b63273b63"
+  apiKey: process.env.apiKey,
+  authDomain: process.env.authDomain,
+  databaseURL:process.env.databaseURL,
+  projectId: process.env.projectId,
+  storageBucket: process.env.storageBucket,
+  messagingSenderId: process.env.messagingSenderId,
+  appId:process.env.appId,
+  measurementId: process.env.measurementId
 };
 
 // Initialize Firebase

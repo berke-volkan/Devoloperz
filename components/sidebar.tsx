@@ -14,6 +14,7 @@ import {
   MemoryStickIcon,
   MessageSquare,
   MusicIcon,
+  NewspaperIcon,
   Settings,
   SettingsIcon,
   Swords,
@@ -21,6 +22,7 @@ import {
 } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useUser ,useSession} from "@clerk/nextjs";
+import { color } from "framer-motion";
 
 // Define Montserrat font face
 const montserrat = Montserrat({
@@ -91,6 +93,18 @@ const routes = [
     label: "Minigames",
     icon:Swords,
     href: "/minigames",
+  },
+  {
+    label: "Teams",
+    icon: VideoIcon,
+    href: "/teams",
+    color:"text-blue-300"
+  },
+  {
+    label:"HackyNews",
+    icon:NewspaperIcon,
+    href:"/hacky-news",
+    color:"text-red-700",
   },
   {
     label: "Settings",

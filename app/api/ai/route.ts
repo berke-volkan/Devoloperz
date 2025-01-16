@@ -1,8 +1,13 @@
 import { NextResponse } from "next/server";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-const sapikey= process.env.GENERATIVE_AI_API_KEY;
+const apikey = "AIzaSyDlbGFTXcs6Q6j1os0zh0Ggu9pzCDBBCOM";
+if (apikey == null) {
+    throw new Error("GENERATIVE_AI_API_KEY is not set");
+}
 
+// Debugging: Log the API key (remove this in production)
+console.log("Using API Key:", apikey);
 const genAI=new GoogleGenerativeAI(apikey);
 
 

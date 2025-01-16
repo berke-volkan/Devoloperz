@@ -8,7 +8,6 @@ export default function Home() {
      <div className="h-full">
       <LandingNavBar />
       <LandingHero />
-      <LandingContent />
      </div>
       
   );

@@ -170,7 +170,7 @@ const handleSubmit = async (event: React.FormEvent) => {
           <div className="mb-2 md:mb-0">
             <span className="font-semibold text-gray-700">Short Link:</span>{' '}
             <a
-              href={link.shortLink}
+              href={`/l/${link.shortLink}`}
               target="_blank"
               rel="noopener noreferrer"
               className="text-blue-500 hover:text-blue-600 transition-colors"
